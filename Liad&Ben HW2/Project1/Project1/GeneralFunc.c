@@ -1,6 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <string.h>
 #include <stdio.h>
 #include "GeneralFunc.h"
+
 
 
 char* myGets(char* buf, int size)
