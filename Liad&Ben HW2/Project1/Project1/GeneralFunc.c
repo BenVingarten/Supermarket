@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <string.h>
 #include <stdio.h>
+#include "Address.h"
 #include "GeneralFunc.h"
 
 
@@ -29,5 +30,21 @@ int countCharInString(const char* str, char c)
 
 	return counter;
 
-	
+}
+
+
+int countWordsInString(const char* str)
+{
+	int count = 0;
+	char* del = " ";
+	char pStr[MAX_LENGTH];
+
+	strcpy(pStr, str);
+	char* temp = strtok(pStr, del);
+	while (temp)
+	{
+		count++;
+		temp = strtok(NULL, del);
+	}
+	return count;
 }

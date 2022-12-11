@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "Address.h"
 #include "GeneralFunc.h"
 
@@ -27,30 +28,29 @@ int getAddress(Address* address)
 	char insertedAdd[MAX_ADDRESS];
 	int numOfDel;
 
-	do
-	{
+	
 		printf("Please enter address by the next format: street#number#city \nMax Lenght is 254 & no spaces with the number\n");
 		myGets(insertedAdd, MAX_ADDRESS);
 		numOfDel = countCharInString(insertedAdd, '#');
 
-	} while (!insertedAdd && numOfDel != 2);
+	if(!insertedAdd || numOfDel != 2)
+		return 0;
 
 
 	char* addressParts[3];
 	char* temp = strtok(insertedAdd, del);
-	int i = 0;
 
-	while(temp)
+	for(int i = 0; i < 3; i++)
 	{
-		if (strlen(temp) == 0)
+		if (!temp || strlen(temp) == 0)
 			return 0;
-		strcpy(addressParts[i++],temp);
+		addressParts[i++] = temp;
 		temp = strtok(NULL, del);
 	}
 
 	strcpy(address->street, addressParts[0]);
-	address->homeNumber = *addressParts[1] - '0';
-	strcpy(address->city, addressParts[0]);
+	address->homeNumber = *(addressParts[1]) + '0';
+	strcpy(address->city, addressParts[2]);
 	return 1;
 	
 }
@@ -64,4 +64,36 @@ void freeAddress(Address* address)
 {
 	free(address->street);
 	free(address->city);
+}
+
+void fixAddressFormat(Address* address)
+{
+	char* del = " ";
+	char* pAddressStreet = strtok(address->street, del);
+	char* pAddressCity = strtok(address->city, del);
+
+	int numOfWordsInStreet = countWordsInString(&address->street);
+	int numOfWordsInCity = countWordsInString(&address->city);
+	 
+	int countStreet = 0;
+	int countCity = 0;
+
+	while (pAddressStreet) {
+		countStreet++;
+		if (!isupper(pAddressStreet[0]) && countStreet < numOfWordsInStreet )
+			toupper(pAddressStreet[0]);
+		else if(!islower(pAddressStreet[0]) && countStreet == numOfWordsInStreet)
+			tolower(pAddressStreet[0]);
+	}
+
+	strcpy(address->street, pAddressStreet);
+
+	while (pAddressCity) {
+		countCity++;
+		if (!isupper(pAddressCity[0]) && countCity < numOfWordsInCity)
+			toupper(pAddressCity[0]);
+		else if (!islower(pAddressCity[0]) && countCity == numOfWordsInCity)
+			tolower(pAddressCity[0]);
+	}
+	strcpy(address->city, pAddressCity);
 }

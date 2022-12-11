@@ -13,5 +13,6 @@ typedef struct
 
 int initAddress(Address* address);
 int getAddress(Address* address);
+void fixAddressFormat(Address* address);
 void freeAddress(Address* address);
 void printAddress(const Address* address);

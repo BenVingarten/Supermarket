@@ -6,10 +6,14 @@ void checkAddress(Address* ad)
 {
 	if (!initAddress(&ad))
 		printf("Error!\n");
-	if (!getAddress(&ad))
+	
+	else if (!getAddress(&ad))
 		printf("Error!\n");
-	printAddress(&ad);
-	freeAddress(&ad);
+	else {
+		//fixAddressFormat(&ad);
+		printAddress(&ad);
+		freeAddress(&ad);
+	}
 }
 
 
