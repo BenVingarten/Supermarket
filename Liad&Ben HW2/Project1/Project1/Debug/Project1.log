@@ -1,8 +1,24 @@
 ﻿  Address.c
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\address.c(52): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char'
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\address.c(52): warning C4024: 'atoi': different types for formal and actual parameter 1
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\address.c(75): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char **'
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\address.c(75): warning C4024: 'countWordsInString': different types for formal and actual parameter 1
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\address.c(76): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char **'
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\address.c(76): warning C4024: 'countWordsInString': different types for formal and actual parameter 1
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\address.c(77): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char **'
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\address.c(77): warning C4024: 'countWordsInString': different types for formal and actual parameter 1
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\address.c(78): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char **'
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\address.c(78): warning C4024: 'countWordsInString': different types for formal and actual parameter 1
+  exe.c
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(7): warning C4047: 'function': 'Address *' differs in levels of indirection from 'Address **'
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(7): warning C4024: 'initAddress': different types for formal and actual parameter 1
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(8): warning C4013: 'printf' undefined; assuming extern returning int
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(11): warning C4047: 'function': 'Address *' differs in levels of indirection from 'Address **'
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(11): warning C4024: 'getAddress': different types for formal and actual parameter 1
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(13): warning C4047: 'function': 'Address *' differs in levels of indirection from 'Address **'
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(13): warning C4024: 'getAddress': different types for formal and actual parameter 1
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(15): warning C4047: 'function': 'Address *' differs in levels of indirection from 'Address **'
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(15): warning C4024: 'fixAddressFormat': different types for formal and actual parameter 1
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(16): warning C4047: 'function': 'const Address *' differs in levels of indirection from 'Address **'
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(16): warning C4024: 'printAddress': different types for formal and actual parameter 1
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(17): warning C4047: 'function': 'Address *' differs in levels of indirection from 'Address **'
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\exe.c(17): warning C4024: 'freeAddress': different types for formal and actual parameter 1
+  GeneralFunc.c
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\generalfunc.c(27): warning C4018: '<': signed/unsigned mismatch
+  Main.c
+  Generating Code...
   Project1.vcxproj -> C:\Users\bv080\OneDrive\מסמכים\GitHub\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe

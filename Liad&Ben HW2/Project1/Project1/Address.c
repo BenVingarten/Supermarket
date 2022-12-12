@@ -11,8 +11,8 @@
 
 int initAddress(Address* address) 
 {
-	address->street = malloc(MAX_LENGTH * sizeof(char));
-	address->city = malloc(MAX_LENGTH * sizeof(char));
+	address->street = (char*)malloc(MAX_LENGTH * sizeof(char));
+	address->city = (char*)malloc(MAX_LENGTH * sizeof(char));
 	if (!address->street || !address->city)
 		return 0;
 	return 1;
@@ -29,12 +29,14 @@ int getAddress(Address* address)
 	int numOfDel;
 
 	
+
 		printf("Please enter address by the next format: street#number#city \nMax Lenght is 254 & no spaces with the number\n");
 		myGets(insertedAdd, MAX_ADDRESS);
 		numOfDel = countCharInString(insertedAdd, '#');
 
-	if(!insertedAdd || numOfDel != 2)
-		return 0;
+		if (!insertedAdd || numOfDel != 2)
+			return 0;
+		
 
 
 	char* addressParts[3];
@@ -44,12 +46,12 @@ int getAddress(Address* address)
 	{
 		if (!temp || strlen(temp) == 0)
 			return 0;
-		addressParts[i++] = temp;
+		addressParts[i] = temp;
 		temp = strtok(NULL, del);
 	}
 
 	strcpy(address->street, addressParts[0]);
-	address->homeNumber = *(addressParts[1]) + '0';
+	address->homeNumber = *addressParts[1] - '0';
 	strcpy(address->city, addressParts[2]);
 	return 1;
 	
@@ -68,32 +70,27 @@ void freeAddress(Address* address)
 
 void fixAddressFormat(Address* address)
 {
-	char* del = " ";
-	char* pAddressStreet = strtok(address->street, del);
-	char* pAddressCity = strtok(address->city, del);
+	char pStreet[MAX_LENGTH];
+	char pCity[MAX_LENGTH];
 
-	int numOfWordsInStreet = countWordsInString(&address->street);
-	int numOfWordsInCity = countWordsInString(&address->city);
-	 
-	int countStreet = 0;
-	int countCity = 0;
+	strcpy(pStreet, address->street);
+	strcpy(pCity, address->city);
 
-	while (pAddressStreet) {
-		countStreet++;
-		if (!isupper(pAddressStreet[0]) && countStreet < numOfWordsInStreet )
-			toupper(pAddressStreet[0]);
-		else if(!islower(pAddressStreet[0]) && countStreet == numOfWordsInStreet)
-			tolower(pAddressStreet[0]);
+	int i = 0;
+	while (pStreet[i] != '\0') 
+	{
+		if(isalpha(pStreet[i]))
+			if(i == 0 && !isupper(pStreet[i]))
+				pStreet[i] =  toupper(pStreet[i]);
+			else if(i > 0 && isupper(pStreet[i]))
+				pStreet[i] = tolower(pStreet[i]);
+		i++;
 	}
 
-	strcpy(address->street, pAddressStreet);
+	
 
-	while (pAddressCity) {
-		countCity++;
-		if (!isupper(pAddressCity[0]) && countCity < numOfWordsInCity)
-			toupper(pAddressCity[0]);
-		else if (!islower(pAddressCity[0]) && countCity == numOfWordsInCity)
-			tolower(pAddressCity[0]);
-	}
-	strcpy(address->city, pAddressCity);
+
+
+
+
 }

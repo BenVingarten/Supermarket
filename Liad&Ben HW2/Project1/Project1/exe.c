@@ -7,13 +7,15 @@ void checkAddress(Address* ad)
 	if (!initAddress(&ad))
 		printf("Error!\n");
 	
-	else if (!getAddress(&ad))
-		printf("Error!\n");
 	else {
-		//fixAddressFormat(&ad);
+		int get = getAddress(&ad);
+		while (!get)
+			get = getAddress(&ad);
+	}
+		fixAddressFormat(&ad);
 		printAddress(&ad);
 		freeAddress(&ad);
-	}
+	
 }
 
 
