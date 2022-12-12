@@ -51,7 +51,7 @@ int getAddress(Address* address)
 	}
 
 	strcpy(address->street, addressParts[0]);
-	address->homeNumber = *addressParts[1] - '0';
+	address->homeNumber = atoi(addressParts[1]);
 	strcpy(address->city, addressParts[2]);
 	return 1;
 	
@@ -87,10 +87,18 @@ void fixAddressFormat(Address* address)
 		i++;
 	}
 
-	
+	i = 0;
+	while (pCity[i] != '\0')
+	{
+		if (isalpha(pCity[i]))
+			if (i == 0 && !isupper(pCity[i]))
+				pCity[i] = toupper(pCity[i]);
+			else if (i > 0 && !islower(pCity[i]))
+				pCity[i] = tolower(pCity[i]);
+		i++;
+	}
 
-
-
-
+	strcpy(address->street, pStreet);
+	strcpy(address->city, pCity);
 
 }

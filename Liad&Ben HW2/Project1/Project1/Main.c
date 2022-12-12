@@ -6,5 +6,9 @@
 void main()
 {
 	Address ad;
-	checkAddress(&ad);
+	while (1)
+	{
+		checkAddress(&ad);
+	}
+	
 }
