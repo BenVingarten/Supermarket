@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "Address.h"
 #include "GeneralFunc.h"
+#include <ctype.h>
 
 
 
@@ -33,18 +34,17 @@ int countCharInString(const char* str, char c)
 }
 
 
-int countWordsInString(const char* str)
+void fixUpperAndLowerCase(char* str)
 {
-	int count = 0;
-	char* del = " ";
-	char pStr[MAX_LENGTH];
-
-	strcpy(pStr, str);
-	char* temp = strtok(pStr, del);
-	while (temp)
+	int i = 0;
+	while (str[i] != '\0')
 	{
-		count++;
-		temp = strtok(NULL, del);
+		if (isalpha(str[i]))
+			if (i == 0 && !isupper(str[i]))
+				str[i] = toupper(str[i]);
+			else if (i > 0 && isupper(str[i]))
+				str[i] = tolower(str[i]);
+		i++;
 	}
-	return count;
 }
+

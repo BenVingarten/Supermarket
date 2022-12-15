@@ -1,14 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "exe.h"
-
+#include "Product.h"
 
 
 void main()
 {
-	Address ad;
-	while (1)
-	{
-		checkAddress(&ad);
-	}
+	Product p;
+	getProduct(&p);
+	printProduct(&p);
+
 	
 }

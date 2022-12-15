@@ -127,11 +127,13 @@
     <ClCompile Include="exe.c" />
     <ClCompile Include="GeneralFunc.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Product.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
     <ClInclude Include="exe.h" />
     <ClInclude Include="GeneralFunc.h" />
+    <ClInclude Include="Product.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
