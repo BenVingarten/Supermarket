@@ -9,7 +9,7 @@ const char* typeTitles[eNOfTypes] = { "Shelf", "Frozen", "Fridge", "FruitVegtabl
 
 int isBarCodeValid(char* str)
 {
-	if (strlen(str) < (BARCODE_LEN - 1)) 
+	if (strlen(str) != (BARCODE_LEN -1))
 		return 0;
 	
 
@@ -37,37 +37,14 @@ int isBarCodeValid(char* str)
 
 	return 1;
 }
-
-
 void getProduct(Product* product)
 {
-	char pName[NAME_LEN];
-	do {
-		printf("please enter product's name, up to %d characters\n", NAME_LEN - 1);
-		 myGets(pName, NAME_LEN);
-
-	} while (pName == NULL || !strlen(pName));
-
-	strcpy(product->name, pName);
-
-	
-	char pBarCode[BARCODE_LEN];
-
-	do {
-		printf("please select a BarCode for the product\nThe barcode contains exactly %d characters\nThe first and last character must be alphabetic\nThe in between can include digits as well\n", BARCODE_LEN - 1);
-		myGets(pBarCode, BARCODE_LEN);
-
-	} while (pName == NULL || !strlen(pName));
-
-	strcpy(product->barCode, pBarCode);
-
+	getProductName(product->name);
+	getBarCode(product->barCode);
 	product->productType = getProductType();
-
-	printf("please enter the product's price\n");
-	scanf("%f", &product->price);
-
-	printf("please enter the product's quantity in stock\n");
-	scanf("%d", &product->quantity);
+	getPrice(&product->price);
+	getQuantity(&product->quantity);
+	
 
 }
 Type getProductType()
@@ -79,14 +56,57 @@ Type getProductType()
 		for (int i = 0; i < eNOfTypes; i++) {
 			printf("%d for %s\n", i, typeTitles[i]);
 		}
+			scanf("%d", &val);
 
-		scanf("%d", &val);
 	} while (val < 0 || val >= eNOfTypes);
 
 	return (Type)val;
 }
-
 void printProduct(Product* product)
 {
 	printf("name: %s\nbarcode: %s\ntype: %s\nprice: %f\nquantity: %d\n", product->name, product->barCode, typeTitles[product->productType], product->price, product->quantity);
+}
+void getBarCode(char* pBar)
+{
+	char temp[10];
+
+	do {
+		printf("please select a BarCode for the product\nThe barcode contains exactly %d characters\nThe first and last character must be alphabetic\nThe in between can include digits as well\n", BARCODE_LEN - 1);
+
+		scanf("%[^\n]s", temp);
+		getchar();
+
+	} while (!(isBarCodeValid(temp)));
+
+	strcpy(pBar, temp);
+}
+void getPrice(float* price)
+{
+	printf("please enter the product's price\n");
+	scanf("%f", price);
+}
+void getQuantity(int* quantity)
+{
+	printf("please enter the product's quantity in stock\n");
+	scanf("%d", quantity);
+}
+void getProductName(char* pName)
+{
+	char temp[25];
+
+	do {
+		printf("please enter product's name, up to %d characters\n", NAME_LEN - 1);
+		scanf("%[^\n]s", temp);
+		getchar();
+
+	} while (!isNameValid(temp));
+
+	strcpy(pName, temp);
+	
+}
+int isNameValid(char* str)
+{
+	if (!strlen(str) || strlen(str) > (NAME_LEN - 1))
+		return 0;
+	return 1;
 }

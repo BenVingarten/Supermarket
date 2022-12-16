@@ -124,16 +124,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Address.c" />
+    <ClCompile Include="Customer.c" />
     <ClCompile Include="exe.c" />
     <ClCompile Include="GeneralFunc.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Product.c" />
+    <ClCompile Include="ShoppingCart.c" />
+    <ClCompile Include="ShoppingItem.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
+    <ClInclude Include="Customer.h" />
     <ClInclude Include="exe.h" />
     <ClInclude Include="GeneralFunc.h" />
     <ClInclude Include="Product.h" />
+    <ClInclude Include="ShoppingCart.h" />
+    <ClInclude Include="ShoppingItem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,2 +1,12 @@
-﻿  Product.c
+﻿  Address.c
+  Customer.c
+  exe.c
+  GeneralFunc.c
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\generalfunc.c(28): warning C4018: '<': signed/unsigned mismatch
+  Main.c
+  Product.c
+  ShoppingCart.c
+  ShoppingItem.c
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\shoppingitem.c(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
   Project1.vcxproj -> C:\Users\bv080\OneDrive\מסמכים\GitHub\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe

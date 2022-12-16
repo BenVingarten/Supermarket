@@ -1,6 +1,6 @@
 #pragma once
-#define NAME_LEN 21
-#define BARCODE_LEN 8
+#define NAME_LEN 21 // 20 characters + '\0'
+#define BARCODE_LEN 8 // 7 characters + '\0' 
 
 
 typedef enum { eShelf, eFrozen, eFridge, eFruitVegtable, eNOfTypes } Type;
@@ -18,7 +18,12 @@ typedef struct
 }Product;
 
 void getProduct(Product* product);
+void getBarCode(char* pBar);
+void getProductName(char* pName);
+void getPrice(float* price);
+void getQuantity(int* quantity);
 void printProduct(Product* product);
 int isBarCodeValid(char* str);
+int isNameValid(char* str);
 Type getProductType();
 

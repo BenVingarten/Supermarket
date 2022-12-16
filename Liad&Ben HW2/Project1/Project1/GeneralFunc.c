@@ -19,7 +19,7 @@ char* myGets(char* buf, int size)
 		*buf = '\0';
 	}
 	return NULL;
-
+	
 }
 
 int countCharInString(const char* str, char c)
