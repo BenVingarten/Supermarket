@@ -10,6 +10,6 @@ typedef struct
 }ShoppingItem;
 
 void getAmountOfItem(int* amount);
-void getShoopingItem1(ShoppingItem* item, Product* p);
-void getShoopingItem2(ShoppingItem* item);
+void getShoopingItemByProduct(ShoppingItem* item, Product* p);
+void getShoopingItem(ShoppingItem* item);
 void printShoppingItem(ShoppingItem* item);

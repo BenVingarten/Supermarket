@@ -9,20 +9,19 @@ void getAmountOfItem(int* amount)
 	scanf("%d", amount);
 
 }
-void getShoopingItem1(ShoppingItem* item, Product* p)
+void getShoopingItemByProduct(ShoppingItem* item, Product* p)
 {
 	strcpy(item->BarCode, p->barCode);
 	item->price = p->price;
 	getAmountOfItem(&item->amount);
 	
 }
-void getShoopingItem2(ShoppingItem* item)
+void getShoopingItem(ShoppingItem* item)
 {
 	getBarCode(item->BarCode);
 	getPrice(&item->price);
 	getAmountOfItem(&item->amount);
 }
-
 void printShoppingItem(ShoppingItem* item)
 {
 	printf("barcode: %s\nprice: %f\namount: %d\n", item->BarCode, item->price, item->amount);
