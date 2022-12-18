@@ -1,6 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "ShoppingCart.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 
 void initShoppingCart(ShoppingCart* shopCart)
@@ -9,22 +11,32 @@ void initShoppingCart(ShoppingCart* shopCart)
 	shopCart->numOfDifferentItems = 0;
 }
 
-int addItemToShoppingCart(ShoppingCart* shopCart, Product* p)
+int addItemToShoppingCart(ShoppingCart* pShopCart, Product* p)
 {
-	ShoppingItem* pItem; //(ShoppingItem*)malloc(sizeof(ShoppingItem));
-	pItem = isShoppingItemInCart(shopCart, p->barCode);
+	/*
+	addItemToShoppingCart
+	
+	input: Shopping cart and Product
+	output: add the product to the shopping cart (considering if its already in or not)
+	*/
+
+	int amount = getAmount(p);
+	if (!amount)	//if asked for more than available
+		return 0;
+
+	ShoppingItem* pItem; 
+	pItem = isBarCodeInCart(pShopCart, p->barCode);
 
 
-	if (pItem)
-	{
-		
-		
-
-		
-	}
+	if (pItem)	//if already added
+		addExistingShoppingItem(amount ,pItem, p);
 	else
 	{
-
+		if (!initShoppingItem(p, pItem, amount) || !addNewShoppingItem(pShopCart, pItem, p)) //create pItem
+		{
+			freeShoppingItem(pItem);		//if couldn't find place for shopping item OR bigger shopping cart - free the new shopping item
+			return 0;
+		}
 	}
 
 	
@@ -35,33 +47,103 @@ int addItemToShoppingCart(ShoppingCart* shopCart, Product* p)
 }
 
 
-ShoppingItem* isBarCodeInCart(ShoppingCart* shopCart, char* barCode)
+ShoppingItem* isBarCodeInCart(ShoppingCart* pShopCart, char* barCode)
 {
-	for (int i = 0; i < shopCart->numOfDifferentItems; i++)
+	/*
+	isBarCodeInCart
+
+	input: Shopping cart and Barcode
+	output: if the item already added - return the item | else - NULL
+	*/
+
+	for (int i = 0; i < pShopCart->numOfDifferentItems; i++)
 	{
-		if(strcmp(shopCart->cart[i]->BarCode,barCode))
-			return shopCart->cart[i];
+		if(strcmp(pShopCart->cart[i]->BarCode,barCode))
+			return pShopCart->cart[i];
 	}
 	return NULL;
 
 }
 
-int addExistingShoppingItem(ShoppingItem* item, Product* p)
+void addExistingShoppingItem(int amount, ShoppingItem* pItem, Product* p)
 {
+	/*
+	addExistingShoppingItem
 
+	input: Amount, Shopping item and Product
+	output: add the item to the shopping cart (pItem pointing to item inside the cart)
+			**remember amount is already been chacked**
+	*/
 
+	pItem->amount += amount;
+	p->quantity -= amount;
 
 }
-int addNewShoppingItem(ShoppingCart* shopCart, ShoppingItem* pItem, Product* p)
+
+int addNewShoppingItem(ShoppingCart* pShopCart, ShoppingItem *pItem, Product* p)
 {
-	if (!getAmount(&pItem->amount, p))
+	/*
+	addNewShoppingItem
+
+	input: Shopping cart, Shopping item and Product
+	output: add the *NEW* item to the shopping cart (pItem pointing to new item outside the cart)
+			**remember amount is in the new item amount and already been chacked**
+	*/
+
+
+	pShopCart->cart = (ShoppingItem**)realloc(pShopCart->cart, sizeof(ShoppingItem*) * ((pShopCart->numOfDifferentItems) + 1 ));
+	if (!pShopCart->cart)		//if not succeeded to fine place in memory
 		return 0;
 
-	shopCart->cart = (ShoppingCart**)realloc(shopCart->cart, sizeof(ShoppingItem*) * (shopCart->numOfDifferentItems) + 1);
-	if (!shopCart->cart)
-		return 0;
+	pShopCart->cart[++pShopCart->numOfDifferentItems] = pItem;	//if succeeded add to cart
 
-	shopCart->cart[shopCart->numOfDifferentItems - 1] = pItem;
-	shopCart->numOfDifferentItems++;
+	p->quantity -= pItem->amount;
+
 	return 1;
+}
+
+int getAmount(Product* p)
+{
+	/*
+	getAmount
+
+	input: Product
+	output: return the amount wanted from the product (NULL if more then product quantity)
+	*/
+
+	int val;
+	printf("enter How many items of this type would you like in the cart\nin stock there are only %d", p->quantity);
+	scanf("%d", &val);
+
+	if (val > p->quantity || val < 0)
+		return 0;
+
+	return val;
+
+}
+
+void freeShoppingCart(ShoppingCart *pShopCart) 
+{
+	/*
+	freeShoppingCart
+
+	input: Shopping cart
+	output: free the space of shopping cart and whats inside (items)
+	*/
+
+	for (int i = 0; i < pShopCart->numOfDifferentItems; i++)
+		freeShoppingItem(pShopCart->cart[i]);
+
+	free(pShopCart);
+
+}
+
+void printShoppingCart(ShoppingCart *pShopCart)
+{
+	printf("There are %d items in cart\n", pShopCart->numOfDifferentItems);
+
+	for (int i = 0; i < pShopCart->numOfDifferentItems; i++)
+		printShoppingItem(pShopCart->cart[i]);
+
+	printf("\n");
 }
