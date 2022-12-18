@@ -4,6 +4,7 @@
 #include "Address.h"
 #include "GeneralFunc.h"
 #include <ctype.h>
+#include <stdlib.h>
 
 
 
@@ -25,7 +26,7 @@ char* myGets(char* buf, int size)
 int countCharInString(const char* str, char c)
 {
 	int counter = 0;
-	for (int i = 0; i < strlen(str); i++)
+	for(int i = 0; i < (int)strlen(str); i++)
 		if (str[i] == c)
 			counter++;
 
@@ -46,5 +47,20 @@ void fixUpperAndLowerCase(char* str)
 				str[i] = tolower(str[i]);
 		i++;
 	}
+}
+
+char*	createDynStr(const char* msg)
+{
+	char* str;
+	char temp[MAX_LENGTH];
+	printf("Enter %s:\n", msg);
+	scanf("%s", temp);
+
+	str = (char*)malloc((strlen(temp) + 1) * sizeof(char));
+	if (!str)
+		return NULL;
+	strcpy(str, temp);
+
+	return str;
 }
 

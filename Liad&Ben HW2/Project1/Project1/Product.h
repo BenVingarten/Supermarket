@@ -20,9 +20,9 @@ typedef struct
 void getProduct(Product* product);
 void getBarCode(char* pBar);
 void getProductName(char* pName);
-void getPrice(float* price);
-void getQuantity(int* quantity);
-void printProduct(Product* product);
+int getPrice(float* price);
+int getQuantity(int* quantity);
+void printProduct(const Product* product);
 int isBarCodeValid(char* str);
 int isNameValid(char* str);
 Type getProductType();

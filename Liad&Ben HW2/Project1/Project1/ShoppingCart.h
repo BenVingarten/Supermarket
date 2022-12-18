@@ -1,6 +1,5 @@
 #pragma once
 #include "ShoppingItem.h"
-#define MAX_CART_LEN 50
 
 typedef struct
 {
@@ -11,4 +10,7 @@ typedef struct
 
 void initShoppingCart(ShoppingCart* shopCart);
 void printShoppingCart(ShoppingCart* shopCart);
-void getShoppingCart(ShoppingCart* shopCart);
+int addItemToShoppingCart(ShoppingCart* shopCart, Product* p);
+ShoppingItem* isBarCodeInCart(ShoppingCart* shopCart, char* barCode)
+int addExistingShoppingItem(ShoppingItem* item, Product* p);
+int addNewShoppingItem(ShoppingItem* item, Product* p);

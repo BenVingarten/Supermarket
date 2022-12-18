@@ -7,14 +7,11 @@
 #include "Address.h"
 #include "GeneralFunc.h"
 
-int initAddress(Address* address) 
-{
-	address->street = (char*)malloc(MAX_LENGTH * sizeof(char));
-	address->city = (char*)malloc(MAX_LENGTH * sizeof(char));
-	if (!address->street || !address->city)
-		return 0;
-	return 1;
-}
+
+
+	
+	
+
 void printAddress(const Address* address)
 {
 	printf("%s %d, %s", address->street, address->homeNumber, address->city);
@@ -29,14 +26,15 @@ void fixAddressFormat(Address* address)
 	fixUpperAndLowerCase(address->street);
 	fixUpperAndLowerCase(address->city);
 }
-int getAddress(Address* address)
+int initAddress(Address* address)
 {
+	
 	char* del = "#";
-	char insertedAdd[MAX_ADDRESS];
+	char insertedAdd[MAX_LENGTH];
 	int numOfDel;
 
 	printf("Please enter address by the next format: street#number#city \nMax Lenght is 254 & no spaces with the number\n");
-	myGets(insertedAdd, MAX_ADDRESS);
+	myGets(insertedAdd, MAX_LENGTH);
 	numOfDel = countCharInString(insertedAdd, '#');
 
 	if (!insertedAdd || numOfDel != 2)
@@ -54,8 +52,13 @@ int getAddress(Address* address)
 		temp = strtok(NULL, del);
 	}
 
+	// allocate Street
+	address->street = (char*)malloc(sizeof(char) * strlen(addressParts[0] + 1));
 	strcpy(address->street, addressParts[0]);
+	// initiallize homeNumber
 	address->homeNumber = atoi(addressParts[1]);
+	// allocate City
+	address->city = (char*)malloc(sizeof(char) * strlen(addressParts[2] + 1));
 	strcpy(address->city, addressParts[2]);
 
 	fixAddressFormat(address);

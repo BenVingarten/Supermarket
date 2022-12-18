@@ -45,7 +45,6 @@ void getProduct(Product* product)
 	getPrice(&product->price);
 	getQuantity(&product->quantity);
 	
-
 }
 Type getProductType()
 {
@@ -62,13 +61,13 @@ Type getProductType()
 
 	return (Type)val;
 }
-void printProduct(Product* product)
+void printProduct(const Product* product)
 {
 	printf("name: %s\nbarcode: %s\ntype: %s\nprice: %f\nquantity: %d\n", product->name, product->barCode, typeTitles[product->productType], product->price, product->quantity);
 }
 void getBarCode(char* pBar)
 {
-	char temp[10];
+	char temp[MAX_LENGTH];
 
 	do {
 		printf("please select a BarCode for the product\nThe barcode contains exactly %d characters\nThe first and last character must be alphabetic\nThe in between can include digits as well\n", BARCODE_LEN - 1);
@@ -80,19 +79,32 @@ void getBarCode(char* pBar)
 
 	strcpy(pBar, temp);
 }
-void getPrice(float* price)
+int getPrice(float* price)
 {
+	float val;
 	printf("please enter the product's price\n");
-	scanf("%f", price);
+	scanf("%f", &val);
+
+	if (val < 0)
+		return 0;
+
+	*price = val;
+	return 1;
 }
-void getQuantity(int* quantity)
+int getQuantity(int* quantity)
 {
+	int val;
 	printf("please enter the product's quantity in stock\n");
-	scanf("%d", quantity);
+	scanf("%d", &val);
+
+	if (val < 0)
+		return 0;
+	*quantity = val;
+	return 1;
 }
 void getProductName(char* pName)
 {
-	char temp[25];
+	char temp[MAX_LENGTH];
 
 	do {
 		printf("please enter product's name, up to %d characters\n", NAME_LEN - 1);
