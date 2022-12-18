@@ -53,12 +53,12 @@ int initAddress(Address* address)
 	}
 
 	// allocate Street
-	address->street = (char*)malloc(sizeof(char) * strlen(addressParts[0] + 1));
+	address->street = (char*)malloc(sizeof(char) * (strlen(addressParts[0]) + 1));
 	strcpy(address->street, addressParts[0]);
 	// initiallize homeNumber
 	address->homeNumber = atoi(addressParts[1]);
 	// allocate City
-	address->city = (char*)malloc(sizeof(char) * strlen(addressParts[2] + 1));
+	address->city = (char*)malloc(sizeof(char) * (strlen(addressParts[2]) + 1));
 	strcpy(address->city, addressParts[2]);
 
 	fixAddressFormat(address);

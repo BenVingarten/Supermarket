@@ -13,9 +13,7 @@ int initCustomer(Customer* customer)
 	input: Customer
 	output: 0 if failed creating, 1 if created cutomer
 	*/
-
 	
-
 	char temp[MAX_LENGTH];
 
 	do {
@@ -27,11 +25,11 @@ int initCustomer(Customer* customer)
 
 
 	customer->name = (char*)malloc((strlen(temp) + 1) * sizeof(char));
+	if (!customer->name)
+		return 0;
+
 	strcpy(customer->name, temp);
-	
-	customer->cart = NULL;
-	
-	
+	initShoppingCart(customer->cart);
 	return 1;
 }
 

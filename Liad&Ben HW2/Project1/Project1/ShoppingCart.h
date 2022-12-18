@@ -3,14 +3,14 @@
 
 typedef struct
 {
+	ShoppingItem** items;
 	int numOfDifferentItems;
-	ShoppingItem** cart;
-
+	
 }ShoppingCart;
 
 
 void initShoppingCart(ShoppingCart* shopCart);
-ShoppingItem* isBarCodeInCart(ShoppingCart* shopCart, char* barCode);
+ ShoppingItem* findBarCodeInCart(ShoppingCart* shopCart, char* barCode);
 int addItemToShoppingCart(ShoppingCart* shopCart, Product* p);
 int getAmount(Product* p);
 void addExistingShoppingItem(int amount, ShoppingItem* item, Product* p);
