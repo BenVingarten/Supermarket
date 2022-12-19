@@ -111,14 +111,9 @@ void getProductName(char* pName)
 		scanf("%[^\n]s", temp);
 		getchar();
 
-	} while (!isNameValid(temp));
+	} while (!isNameValid(temp,NAME_LEN - 1));
 
 	strcpy(pName, temp);
 	
 }
-int isNameValid(char* str)
-{
-	if (!strlen(str) || strlen(str) > (NAME_LEN - 1))
-		return 0;
-	return 1;
-}
+

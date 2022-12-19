@@ -14,34 +14,27 @@ int initCustomer(Customer* customer)
 	output: 0 if failed creating, 1 if created cutomer
 	*/
 	
-	char temp[MAX_LENGTH];
+	char* str;
+	str = createDynStr("customer's name");
+	
+	if (!str)
+		return 0;
 
-	do {
-		printf("please enter customer's name, up to %d characters\n", MAX_LENGTH - 1);
-		scanf("%[^\n]s", temp);
-		getchar();
+	customer->name = (char*)malloc((strlen(str) + 1) * sizeof(char));
 
-	} while (!strlen(temp));
-
-
-	customer->name = (char*)malloc((strlen(temp) + 1) * sizeof(char));
 	if (!customer->name)
 		return 0;
 
-	strcpy(customer->name, temp);
+	strcpy(customer->name, str);
 	
-	initShoppingCart(customer->cart);
-	
+	customer->cart = NULL; //customer hasnt started purchase yet, so there is no cart now.
 	return 1;
 }
-
 void printCustomer(const Customer* customer)
 {
 	printf("customer's name: %s\n", customer->name);
 	printShoppingCart(customer->cart);
 }
-
-
 void freeCustomer(Customer* customer)
 {
 	/*
@@ -55,3 +48,18 @@ void freeCustomer(Customer* customer)
 	freeShoppingCart(customer->cart);
 	free(customer->name);
 }
+void linkCartToCustomer(Customer* customer, ShoppingCart* pShopCart)
+{
+	customer->cart = pShopCart;
+}
+int initEmptyCart(Customer* customer)
+{
+	ShoppingCart* pShopCart = (ShoppingCart*)malloc(sizeof(ShoppingCart));
+	if (!pShopCart)
+		return 0;
+
+	customer->cart = pShopCart;
+	initShoppingCart(customer->cart);
+	return 1;
+}
+	

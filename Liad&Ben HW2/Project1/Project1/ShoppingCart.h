@@ -17,3 +17,4 @@ void addExistingShoppingItem(int amount, ShoppingItem* item, Product* p);
 int addNewShoppingItem(ShoppingCart* shopCart, ShoppingItem* pItem, Product* p);
 void freeShoppingCart(ShoppingCart *pShopCart);
 void printShoppingCart(ShoppingCart *pShopCart);
+float getTotalSumOfCart(ShoppingCart* pShopCart);

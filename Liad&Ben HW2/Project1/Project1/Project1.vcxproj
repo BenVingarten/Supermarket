@@ -131,6 +131,7 @@
     <ClCompile Include="Product.c" />
     <ClCompile Include="ShoppingCart.c" />
     <ClCompile Include="ShoppingItem.c" />
+    <ClCompile Include="SuperMarket.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Product.h" />
     <ClInclude Include="ShoppingCart.h" />
     <ClInclude Include="ShoppingItem.h" />
+    <ClInclude Include="SuperMarket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -26,12 +26,10 @@ int initShoppingItem(Product *product, ShoppingItem *pShoppingItem, int amount)
 	
 	return 1;
 }
-
 void printShoppingItem(ShoppingItem* item)
 {
 	printf("barcode: %s\nprice: %f\namount: %d\n", item->BarCode, item->price, item->amount);
 }
-
 void freeShoppingItem(ShoppingItem *pItem) 
 {
 	free(pItem);

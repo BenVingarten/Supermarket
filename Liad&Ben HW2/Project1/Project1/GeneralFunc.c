@@ -22,7 +22,6 @@ char* myGets(char* buf, int size)
 	return NULL;
 	
 }
-
 int countCharInString(const char* str, char c)
 {
 	int counter = 0;
@@ -33,8 +32,6 @@ int countCharInString(const char* str, char c)
 	return counter;
 
 }
-
-
 void fixUpperAndLowerCase(char* str)
 {
 	int i = 0;
@@ -48,19 +45,32 @@ void fixUpperAndLowerCase(char* str)
 		i++;
 	}
 }
-
-char*	createDynStr(const char* msg)
+int isNameValid(char* str, int limit)
+{
+	if (!strlen(str) || strlen(str) > limit)
+		return 0;
+	return 1;
+}
+char* createDynStr(const char* msg)
 {
 	char* str;
 	char temp[MAX_LENGTH];
-	printf("Enter %s:\n", msg);
-	scanf("%s", temp);
+
+	do {
+
+		printf("Enter %s:\n", msg);
+		scanf("%[^\n]s", temp);
+		getchar();
+
+	} while (!isNameValid(temp,MAX_LENGTH - 1));
 
 	str = (char*)malloc((strlen(temp) + 1) * sizeof(char));
 	if (!str)
 		return NULL;
-	strcpy(str, temp);
 
+	strcpy(str, temp);
 	return str;
 }
+
+
 

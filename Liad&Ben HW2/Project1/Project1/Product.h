@@ -24,6 +24,5 @@ int getPrice(float* price);
 int getQuantity(int* quantity);
 void printProduct(const Product* product);
 int isBarCodeValid(char* str);
-int isNameValid(char* str);
 Type getProductType();
 
