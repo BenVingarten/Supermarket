@@ -1,6 +1,2 @@
 ﻿  Customer.c
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\customer.c(32): warning C4047: 'function': 'ShoppingCart *' differs in levels of indirection from 'ShoppingItem **'
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\customer.c(32): warning C4024: 'initShoppingCart': different types for formal and actual parameter 1
-  ShoppingCart.c
-  Generating Code...
-  Project1.vcxproj -> C:\Users\bv080\OneDrive\מסמכים\GitHub\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe
+  Project1.vcxproj -> D:\C Files\c hw2\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe

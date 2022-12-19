@@ -77,6 +77,7 @@ void addExistingShoppingItem(int amount, ShoppingItem* pItem, Product* p)
 	pItem->amount += amount;
 	p->quantity -= amount;
 
+
 }
 
 int addNewShoppingItem(ShoppingCart* pShopCart, ShoppingItem *pItem, Product* p)
