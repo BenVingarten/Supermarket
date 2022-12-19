@@ -5,10 +5,12 @@
 #include <stdio.h>
 
 
-void initShoppingCart(ShoppingCart* shopCart)
+void initShoppingCart(ShoppingCart* pShopCart)
 {
-	shopCart->items = NULL;
-	shopCart->numOfDifferentItems = 0;
+	ShoppingCart shopCart;
+	pShopCart = &shopCart;
+	pShopCart->items = NULL;
+	pShopCart->numOfDifferentItems = 0;
 }
 
 int addItemToShoppingCart(ShoppingCart* pShopCart, Product* p)
@@ -140,13 +142,20 @@ void freeShoppingCart(ShoppingCart *pShopCart)
 
 void printShoppingCart(ShoppingCart* pShopCart)
 {
-	
+	if (pShopCart->numOfDifferentItems)
+	{
 		printf("There are %d items in cart\n", pShopCart->numOfDifferentItems);
 
 		for (int i = 0; i < pShopCart->numOfDifferentItems; i++)
 			printShoppingItem(pShopCart->items[i]);
 
 		printf("\n");
+
+	}
+	else
+	{
+		printf("There are 0 items in cart");
+	}
 	
 	
 }

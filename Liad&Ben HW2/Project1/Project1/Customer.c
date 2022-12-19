@@ -30,8 +30,6 @@ int initCustomer(Customer* customer)
 
 	strcpy(customer->name, temp);
 	
-	ShoppingCart shopCart;	//at first we didnt initallized the shop cart so we transfered NULL
-	customer->cart = &shopCart;
 	initShoppingCart(customer->cart);
 	
 	return 1;
