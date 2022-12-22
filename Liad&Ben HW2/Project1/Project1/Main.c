@@ -8,11 +8,17 @@
 
 void main()
 {
-	Customer c1;
-	if (!initCustomer(&c1))
-		printf("Error!\n");
-
-	printCustomer(&c1);
+	
+	SuperMarket mar;
+	initSuperMarket(&mar);
+	printSuperMarket(&mar);
+	printf("------------------\n");
+	addProductToSuperMarket(&mar);
+	printSuperMarket(&mar);
+	printf("------------------\n");
+	addProductToSuperMarket(&mar);
+	printSuperMarket(&mar);
+	
 	
 }
 	

@@ -17,7 +17,7 @@ typedef struct
 
 }Product;
 
-void getProduct(Product* product);
+void initProduct(Product* product);
 void getBarCode(char* pBar);
 void getProductName(char* pName);
 int getPrice(float* price);

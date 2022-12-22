@@ -21,7 +21,7 @@ int isBarCodeValid(char* str)
 			return 0;
 
 		if (isalpha(str[i]) && !isupper(str[i]))
-			return 0;
+			str[i] = toupper(str[i]);
 
 		if (isdigit(str[i]) && (i == 0 || i == BARCODE_LEN - 2))
 			return 0;
@@ -37,7 +37,7 @@ int isBarCodeValid(char* str)
 
 	return 1;
 }
-void getProduct(Product* product)
+void initProduct(Product* product)
 {
 	getProductName(product->name);
 	getBarCode(product->barCode);
@@ -63,7 +63,7 @@ Type getProductType()
 }
 void printProduct(const Product* product)
 {
-	printf("name: %s\nbarcode: %s\ntype: %s\nprice: %f\nquantity: %d\n", product->name, product->barCode, typeTitles[product->productType], product->price, product->quantity);
+	printf("name: %s | barcode: %s | type: %s | price: %f | quantity: %d\n", product->name, product->barCode, typeTitles[product->productType], product->price, product->quantity);
 }
 void getBarCode(char* pBar)
 {

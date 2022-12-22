@@ -51,21 +51,17 @@ int isNameValid(char* str, int limit)
 		return 0;
 	return 1;
 }
-int getDynamicName(char * dest, char * msg)
+char* getName(char * msg)
 {
-	char* str;
-	str = createDynStr(msg);
+	char str[MAX_LENGTH];
+	do {
+		printf("enter %s\n", msg);
+		scanf("%[^\n]s", str);
+		getchar();
 
-	if (!str)
-		return 0;
-
-	dest = (char*)malloc((strlen(str) + 1) * sizeof(char));
-
-	if (!dest)
-		return 0;
-
-	strcpy(dest, str);
-	return 1;
+	} while (!isNameValid(str, MAX_LENGTH - 1));
+	
+	return str;
 }
 char* createDynStr(const char* msg)
 {

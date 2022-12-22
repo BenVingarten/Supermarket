@@ -84,14 +84,13 @@ int addNewShoppingItem(ShoppingCart* pShopCart, ShoppingItem *pItem, Product* p)
 	input: Shopping cart, Shopping item and Product
 	output: add the *NEW* item to the shopping cart (pItem pointing to new item outside the cart)
 			**remember amount is in the new item amount and already been chacked**
-	*/
-
+	*/							 
 
 	pShopCart->items = (ShoppingItem**)realloc(pShopCart->items, sizeof(ShoppingItem*) * ((pShopCart->numOfDifferentItems) + 1 ));
 	if (!pShopCart->items)		//if not succeeded to fine place in memory
 		return 0;
 
-	pShopCart->items[++pShopCart->numOfDifferentItems] = pItem;	//if succeeded add to cart
+	pShopCart->items[pShopCart->numOfDifferentItems++] = pItem;	//if succeeded add to cart
 
 	p->quantity -= pItem->amount;
 
@@ -142,11 +141,10 @@ void printShoppingCart(ShoppingCart* pShopCart)
 }
 float getTotalSumOfCart(ShoppingCart* pShopCart)
 {
-	float totalSum = 0,current;
+	float totalSum = 0;
+
 	for (int i = 0; i < pShopCart->numOfDifferentItems; i++)
-	{
-		current = pShopCart->items[i]->price  * pShopCart->items[i]->amount;
-		totalSum += current;
-	}
+		totalSum += pShopCart->items[i]->price  * pShopCart->items[i]->amount;
+
 	return totalSum;
 }

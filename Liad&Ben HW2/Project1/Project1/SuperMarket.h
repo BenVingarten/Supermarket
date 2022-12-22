@@ -16,8 +16,10 @@ typedef struct
 int initSuperMarket(SuperMarket* market);
 void printSuperMarket(const SuperMarket* market);
 int addProductToSuperMarket(SuperMarket* market);
+int checkIfProductExists(SuperMarket* market, char* barCode);
 int addCustomerToSuperMarket(SuperMarket* market);
 int purchase(SuperMarket* market);
 void printAllProductsByType(SuperMarket* market);
+void getListOfProducts(SuperMarket* market);
 
 

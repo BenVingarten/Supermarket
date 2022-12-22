@@ -14,8 +14,15 @@ int initCustomer(Customer* customer)
 	output: 0 if failed creating, 1 if created cutomer
 	*/
 	
-	if (!getDynamicName(customer->name, "customer's name"))
+	char temp[MAX_LENGTH];
+
+	strcpy(temp,getName("customer's name"));
+	customer->name = (char*)malloc((strlen(temp) + 1) * sizeof(char));
+
+	if (!customer->name)
 		return 0;
+
+	strcpy(customer->name, temp);
 	
 	customer->cart = NULL; //customer hasnt started purchase yet, so there is no cart now.
 	return 1;
@@ -23,7 +30,11 @@ int initCustomer(Customer* customer)
 void printCustomer(const Customer* customer)
 {
 	printf("customer's name: %s\n", customer->name);
-	printShoppingCart(customer->cart);
+
+	if (customer->cart)
+		printShoppingCart(customer->cart);
+	else
+		printf("Cart hasnt been created yet\n");
 }
 void freeCustomer(Customer* customer)
 {

@@ -14,7 +14,7 @@
 
 void printAddress(const Address* address)
 {
-	printf("%s %d, %s", address->street, address->homeNumber, address->city);
+	printf("%s %d, %s\n", address->street, address->homeNumber, address->city);
 }
 void freeAddress(Address* address)
 {
@@ -56,7 +56,10 @@ int initAddress(Address* address)
 	address->street = (char*)malloc(sizeof(char) * (strlen(addressParts[0]) + 1));
 	strcpy(address->street, addressParts[0]);
 	// initiallize homeNumber
-	address->homeNumber = atoi(addressParts[1]);
+	int num = atoi(addressParts[1]);
+	if (!num)
+		return 0;
+	address->homeNumber = num;
 	// allocate City
 	address->city = (char*)malloc(sizeof(char) * (strlen(addressParts[2]) + 1));
 	strcpy(address->city, addressParts[2]);
