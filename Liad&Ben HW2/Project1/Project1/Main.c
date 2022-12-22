@@ -8,8 +8,12 @@
 
 void main()
 {
+	Customer c1;
+	if (!initCustomer(&c1))
+		printf("Error!\n");
 
-
+	printCustomer(&c1);
+	
 }
 	
 

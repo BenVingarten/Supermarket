@@ -19,7 +19,7 @@ int addItemToShoppingCart(ShoppingCart* pShopCart, Product* p)
 	input: Shopping cart and Product
 	output: add the product to the shopping cart (considering if its already in or not)
 	*/
-
+	
 	int amount = getAmount(p);
 	if (!amount)	//if asked for more than available
 		return 0;

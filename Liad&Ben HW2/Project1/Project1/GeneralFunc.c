@@ -47,8 +47,24 @@ void fixUpperAndLowerCase(char* str)
 }
 int isNameValid(char* str, int limit)
 {
-	if (!strlen(str) || strlen(str) > limit)
+	if (!strlen(str) || (int)strlen(str) > limit)
 		return 0;
+	return 1;
+}
+int getDynamicName(char * dest, char * msg)
+{
+	char* str;
+	str = createDynStr(msg);
+
+	if (!str)
+		return 0;
+
+	dest = (char*)malloc((strlen(str) + 1) * sizeof(char));
+
+	if (!dest)
+		return 0;
+
+	strcpy(dest, str);
 	return 1;
 }
 char* createDynStr(const char* msg)

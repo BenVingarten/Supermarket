@@ -14,18 +14,8 @@ int initCustomer(Customer* customer)
 	output: 0 if failed creating, 1 if created cutomer
 	*/
 	
-	char* str;
-	str = createDynStr("customer's name");
-	
-	if (!str)
+	if (!getDynamicName(customer->name, "customer's name"))
 		return 0;
-
-	customer->name = (char*)malloc((strlen(str) + 1) * sizeof(char));
-
-	if (!customer->name)
-		return 0;
-
-	strcpy(customer->name, str);
 	
 	customer->cart = NULL; //customer hasnt started purchase yet, so there is no cart now.
 	return 1;
@@ -47,10 +37,6 @@ void freeCustomer(Customer* customer)
 
 	freeShoppingCart(customer->cart);
 	free(customer->name);
-}
-void linkCartToCustomer(Customer* customer, ShoppingCart* pShopCart)
-{
-	customer->cart = pShopCart;
 }
 int initEmptyCart(Customer* customer)
 {

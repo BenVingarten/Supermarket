@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "SuperMarket.h"
 #include <stdlib.h>
+#include "GeneralFunc.h"
 
 int initSuperMarket(SuperMarket* market)
 {

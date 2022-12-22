@@ -7,3 +7,4 @@ int countCharInString(const char* str, char c);
 void fixUpperAndLowerCase(char* str);
 char*	createDynStr(const char* msg);
 int isNameValid(char* str, int limit);
+int getDynamicName(char* dest, char* msg);
