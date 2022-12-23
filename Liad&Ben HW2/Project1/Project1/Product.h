@@ -3,6 +3,7 @@
 #define BARCODE_LEN 8 // 7 characters + '\0' 
 
 
+
 typedef enum { eShelf, eFrozen, eFridge, eFruitVegtable, eNOfTypes } Type;
 const char* typeTitles[eNOfTypes];
 
@@ -20,8 +21,8 @@ typedef struct
 void initProduct(Product* product);
 void getBarCode(char* pBar);
 void getProductName(char* pName);
-int getPrice(float* price);
-int getQuantity(int* quantity);
+void getPrice(float* price);
+void getQuantity(int* quantity);
 void printProduct(const Product* product);
 int isBarCodeValid(char* str);
 Type getProductType();

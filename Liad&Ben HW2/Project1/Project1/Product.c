@@ -4,8 +4,11 @@
 #include <ctype.h>
 #include <string.h>
 #include "GeneralFunc.h"
+#include "SuperMarket.h"
 
-const char* typeTitles[eNOfTypes] = { "Shelf", "Frozen", "Fridge", "FruitVegtable", };
+
+
+const char* typeTitles[eNOfTypes] = { "Shelf", "Frozen", "Fridge", "FruitVegtable"};
 
 int isBarCodeValid(char* str)
 {
@@ -34,17 +37,16 @@ int isBarCodeValid(char* str)
 
 	if (digitCount < 3 || digitCount > 5)
 		return 0;
-
+	
 	return 1;
 }
 void initProduct(Product* product)
 {
 	getProductName(product->name);
-	getBarCode(product->barCode);
 	product->productType = getProductType();
 	getPrice(&product->price);
 	getQuantity(&product->quantity);
-	
+	getBarCode(product->barCode);
 }
 Type getProductType()
 {
@@ -70,7 +72,7 @@ void getBarCode(char* pBar)
 	char temp[MAX_LENGTH];
 
 	do {
-		printf("please select a BarCode for the product\nThe barcode contains exactly %d characters\nThe first and last character must be alphabetic\nThe in between can include digits as well\n", BARCODE_LEN - 1);
+		printf("please select a BarCode for the product\nmake sure it's valid and different from existing Barcodes\n", BARCODE_LEN - 1);
 
 		scanf("%[^\n]s", temp);
 		getchar();
@@ -79,26 +81,30 @@ void getBarCode(char* pBar)
 
 	strcpy(pBar, temp);
 }
-int getPrice(float* price)
+void getPrice(float* price)
 {
 	float val;
-	printf("please enter the product's price\n");
-	scanf("%f", &val);
+	do{
 
-	if (val < 0)
-		return 0;
+		printf("please enter valid product's price\n");
+		scanf("%f", &val);
+		getchar();
 
+	} while (val <= 0);
+	
 	*price = val;
 	return 1;
 }
-int getQuantity(int* quantity)
+void getQuantity(int* quantity)
 {
 	int val;
-	printf("please enter the product's quantity in stock\n");
-	scanf("%d", &val);
+	do {
 
-	if (val < 0)
-		return 0;
+		printf("please enter valid product's quantity\n");
+		scanf("%d", &val);
+		getchar();
+	} while (val <= 0);
+
 	*quantity = val;
 	return 1;
 }
@@ -116,4 +122,5 @@ void getProductName(char* pName)
 	strcpy(pName, temp);
 	
 }
+
 

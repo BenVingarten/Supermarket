@@ -1,5 +1,6 @@
-﻿  SuperMarket.c
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\supermarket.c(55): warning C4047: 'function': 'const Customer *' differs in levels of indirection from 'Customer **'
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\supermarket.c(55): warning C4024: 'printCustomer': different types for formal and actual parameter 1
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\supermarket.c(106): warning C4715: 'addProductToSuperMarket': not all control paths return a value
+﻿  Product.c
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\product.c(75): warning C4474: 'printf' : too many arguments passed for format string
+  c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\product.c(75): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\product.c(96): warning C4098: 'getPrice': 'void' function returning a value
+c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\product.c(109): warning C4098: 'getQuantity': 'void' function returning a value
   Project1.vcxproj -> C:\Users\bv080\OneDrive\מסמכים\GitHub\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe

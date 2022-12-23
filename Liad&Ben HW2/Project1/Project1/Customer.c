@@ -14,15 +14,11 @@ int initCustomer(Customer* customer)
 	output: 0 if failed creating, 1 if created cutomer
 	*/
 	
-	char temp[MAX_LENGTH];
-
-	strcpy(temp,getName("customer's name"));
-	customer->name = (char*)malloc((strlen(temp) + 1) * sizeof(char));
-
-	if (!customer->name)
+	char* pName = createDynStr("customer's name");
+	if (!pName)
 		return 0;
 
-	strcpy(customer->name, temp);
+	customer->name = pName;
 	
 	customer->cart = NULL; //customer hasnt started purchase yet, so there is no cart now.
 	return 1;

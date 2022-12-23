@@ -54,14 +54,21 @@ int initAddress(Address* address)
 
 	// allocate Street
 	address->street = (char*)malloc(sizeof(char) * (strlen(addressParts[0]) + 1));
+	if (!address->street)
+		return 0;
+
 	strcpy(address->street, addressParts[0]);
+
 	// initiallize homeNumber
 	int num = atoi(addressParts[1]);
 	if (!num)
 		return 0;
 	address->homeNumber = num;
+
 	// allocate City
 	address->city = (char*)malloc(sizeof(char) * (strlen(addressParts[2]) + 1));
+	if (!address->city)
+		return 0;
 	strcpy(address->city, addressParts[2]);
 
 	fixAddressFormat(address);
