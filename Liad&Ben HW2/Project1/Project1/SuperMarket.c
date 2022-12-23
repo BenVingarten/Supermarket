@@ -37,6 +37,7 @@ int initSuperMarket(SuperMarket* market)
 
 
 }
+
 void printSuperMarket(const SuperMarket* market)
 {
 	printf("name: %s\naddress: ", market->name);
@@ -61,6 +62,31 @@ void printSuperMarket(const SuperMarket* market)
 	}
 	
 }
+
+void freeSuperMarket(SuperMarket* market)
+{
+	// free customers
+	for (int i = 0; i < market->numOfCustomers; i++)
+		freeCustomer(market->allCustomers[i]);
+	free(market->allCustomers);
+
+	//free products
+	for (int i = 0; i < market->numOfProducts; i++)
+		freeCustomer(market->allProducts[i]);
+	free(market->allProducts);
+	
+	//free address
+	freeAddress(&market->address);
+
+	//free name
+	free(market->name);
+
+	//free superMarket
+	free(market);
+
+}
+
+
 int addProductToSuperMarket(SuperMarket* market)
 {
 	// show user all products in superMarket
@@ -117,15 +143,7 @@ int addProductToSuperMarket(SuperMarket* market)
 	}
 
 }
-int isProductBarcodeExists(SuperMarket* market, char* barCode)
-{
-	for (int i = 0; i < market->numOfProducts; i++)
-	{
-		if (!strcmp(market->allProducts[i]->barCode, barCode))
-			return (i + 1);
-	}
-	return 0;
-}
+
 void getListOfProducts(SuperMarket* market)
 {
 	if (!market->allProducts)
@@ -142,52 +160,33 @@ void getListOfProducts(SuperMarket* market)
 	}
 
 }
-void getListOfCustomers(SuperMarket* market)
-{
-	if (!market->allCustomers)
-		printf("there are no customers\n");
-	else
-	{
-		printf("there are %d registerd customers in superMarket\n", market->numOfCustomers);
-		for (int i = 0; i < market->numOfCustomers; i++)
-		{
-			printf("%d) ", (i + 1));
-			printCustomer(market->allCustomers[i]);
-		}
 
-	}
-}
-void freeSuperMarket(SuperMarket* market)
+int isProductBarcodeExists(SuperMarket* market, char* barCode)
 {
-	// free customers
-	for (int i = 0; i < market->numOfCustomers; i++)
-		freeCustomer(market->allCustomers[i]);
-	free(market->allCustomers);
-
-	//free products
 	for (int i = 0; i < market->numOfProducts; i++)
-		freeCustomer(market->allProducts[i]);
-	free(market->allProducts);
-	
-	//free address
-	freeAddress(&market->address);
-
-	//free name
-	free(market->name);
-
-	//free superMarket
-	free(market);
-
-}
-int isCustomerExist(SuperMarket* market, char* name)
-{
-	for (int i = 0; i < market->numOfCustomers; i++)
 	{
-		if (!strcmp(market->allCustomers[i], name))
-			return (i+1);
+		if (!strcmp(market->allProducts[i]->barCode, barCode))
+			return (i + 1);
 	}
 	return 0;
 }
+
+void printAllProductsByType(SuperMarket* market)
+{
+	Type productType = getProductType();
+	int count = 0;
+	for (int i = 0; i < market->allProducts; i++)
+	{
+		if (!strcmp(market->allProducts[i]->productType, productType))
+			printProduct(market->allProducts[i]);
+
+		count++;
+	}
+	if (!count)
+		printf("there are no products of this type in superMarket!\n");
+}
+
+
 int addCustomerToSuperMarket(SuperMarket* market)
 {
 	// show list of registerd customers
@@ -223,9 +222,38 @@ int addCustomerToSuperMarket(SuperMarket* market)
 	market->allCustomers[market->numOfCustomers++] = c;
 
 }
+
+void getListOfCustomers(SuperMarket* market)
+{
+	if (!market->allCustomers)
+		printf("there are no customers\n");
+	else
+	{
+		printf("there are %d registerd customers in superMarket\n", market->numOfCustomers);
+		for (int i = 0; i < market->numOfCustomers; i++)
+		{
+			printf("%d) ", (i + 1));
+			printCustomer(market->allCustomers[i]);
+		}
+
+	}
+}
+
+int isCustomerExist(SuperMarket* market, char* name)
+{
+	for (int i = 0; i < market->numOfCustomers; i++)
+	{
+		if (!strcmp(market->allCustomers[i], name))
+			return (i+1);
+	}
+	return 0;
+}
+
+
 int purchase(SuperMarket* market)
 {
-	//getListOfCustomers(market);
+	//getListOfCustomers(market);		//if we want to print all customers
+
 	
 	char* pName = getName("customer's name you want to buy with");
 	int customerNumber = isCustomerExist(market, pName); //customer number = customer index + 1
@@ -284,20 +312,6 @@ int purchase(SuperMarket* market)
 		}
 		
 	} while (keepBuying);
-}
-void printAllProductsByType(SuperMarket* market)
-{
-	Type productType = getProductType();
-	int count = 0;
-	for (int i = 0; i < market->allProducts; i++)
-	{
-		if (!strcmp(market->allProducts[i]->productType, productType))
-			printProduct(market->allProducts[i]);
-
-		count++;
-	}
-	if (!count)
-		printf("there are no products of this type in superMarket!\n");
 }
 
 

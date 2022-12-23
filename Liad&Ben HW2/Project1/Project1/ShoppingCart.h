@@ -10,11 +10,13 @@ typedef struct
 
 
 void initShoppingCart(ShoppingCart* shopCart);
- ShoppingItem* findBarCodeInCart(ShoppingCart* shopCart, char* barCode);
+void printShoppingCart(ShoppingCart *pShopCart);
+void freeShoppingCart(ShoppingCart *pShopCart);
+
 int addItemToShoppingCart(ShoppingCart* shopCart, Product* p);
-int getAmount(Product* p);
 void addExistingShoppingItem(int amount, ShoppingItem* item, Product* p);
 int addNewShoppingItem(ShoppingCart* shopCart, ShoppingItem* pItem, Product* p);
-void freeShoppingCart(ShoppingCart *pShopCart);
-void printShoppingCart(ShoppingCart *pShopCart);
+ShoppingItem* findBarCodeInCart(ShoppingCart* shopCart, char* barCode);
+int getAmount(Product* p);
+
 float getTotalSumOfCart(ShoppingCart* pShopCart);

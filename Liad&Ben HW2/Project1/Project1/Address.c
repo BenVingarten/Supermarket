@@ -8,10 +8,6 @@
 #include "GeneralFunc.h"
 
 
-
-	
-	
-
 void printAddress(const Address* address)
 {
 	printf("%s %d, %s\n", address->street, address->homeNumber, address->city);
