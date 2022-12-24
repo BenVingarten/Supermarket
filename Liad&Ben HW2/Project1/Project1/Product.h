@@ -26,4 +26,5 @@ void getQuantity(int* quantity);
 void printProduct(const Product* product);
 int isBarCodeValid(char* str);
 Type getProductType();
+void freeProduct(Product* p);
 

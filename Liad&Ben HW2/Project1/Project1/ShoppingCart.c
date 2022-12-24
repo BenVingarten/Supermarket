@@ -11,13 +11,19 @@ void initShoppingCart(ShoppingCart* pShopCart)
 	pShopCart->numOfDifferentItems = 0;
 }
 
-void printShoppingCart(ShoppingCart* pShopCart)
+void printShoppingCart(const ShoppingCart* pShopCart)
 {
-		printf("There are %d items in cart\n", pShopCart->numOfDifferentItems);
+	if (!pShopCart)
+	{
+		printf("There are no items in cart\n");
+		return;
+	}
+	
+	printf("There are %d items in cart\n", pShopCart->numOfDifferentItems);
 
-		for (int i = 0; i < pShopCart->numOfDifferentItems; i++)
-			printShoppingItem(pShopCart->items[i]);
-			printf("\n");
+	for (int i = 0; i < pShopCart->numOfDifferentItems; i++)
+		printShoppingItem(pShopCart->items[i]);
+		printf("\n");
 		
 }
 
@@ -148,8 +154,21 @@ int getAmount(Product* p)
 }
 
 
-float getTotalSumOfCart(ShoppingCart* pShopCart)
+float getTotalSumOfCart(const ShoppingCart* pShopCart)
 {
+	/*
+	getTotalSumOfCart
+
+	input: Shopping cart
+	output: total sum of cart to pay
+	*/
+	
+	if (!pShopCart)
+	{
+		printf("There are no items in cart\n");
+		return 0;
+	}
+
 	float totalSum = 0;
 
 	for (int i = 0; i < pShopCart->numOfDifferentItems; i++)

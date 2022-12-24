@@ -5,6 +5,7 @@ typedef struct
 {
 	char* name;
 	ShoppingCart* cart;
+	float balance;
 
 }Customer;
 

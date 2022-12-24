@@ -1,6 +1,4 @@
-﻿  Product.c
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\product.c(75): warning C4474: 'printf' : too many arguments passed for format string
-  c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\product.c(75): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\product.c(96): warning C4098: 'getPrice': 'void' function returning a value
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\product.c(109): warning C4098: 'getQuantity': 'void' function returning a value
-  Project1.vcxproj -> C:\Users\bv080\OneDrive\מסמכים\GitHub\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe
+﻿  GeneralFunc.c
+  Main.c
+  Generating Code...
+  Project1.vcxproj -> D:\C Files\c hw2\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe

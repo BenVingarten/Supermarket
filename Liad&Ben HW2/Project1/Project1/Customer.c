@@ -21,6 +21,7 @@ int initCustomer(Customer* customer)
 	customer->name = pName;
 	
 	customer->cart = NULL; //customer hasnt started purchase yet, so there is no cart now.
+	customer->balance = 0;
 	return 1;
 }
 void printCustomer(const Customer* customer)
@@ -28,9 +29,12 @@ void printCustomer(const Customer* customer)
 	printf("customer's name: %s\n", customer->name);
 
 	if (customer->cart)
+	{
 		printShoppingCart(customer->cart);
+		printf("Customer Balance: %f\n", customer->balance);
+	}
 	else
-		printf("Cart hasnt been created yet\n");
+		printf("Cart hasnt been created yet, balance 0\n");
 }
 void freeCustomer(Customer* customer)
 {

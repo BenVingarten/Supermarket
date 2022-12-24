@@ -5,6 +5,7 @@
 #include <string.h>
 #include "GeneralFunc.h"
 #include "SuperMarket.h"
+#include <stdlib.h>
 
 
 
@@ -72,7 +73,7 @@ void getBarCode(char* pBar)
 	char temp[MAX_LENGTH];
 
 	do {
-		printf("please select a BarCode for the product\nmake sure it's valid and different from existing Barcodes\n", BARCODE_LEN - 1);
+		printf("please select a BarCode for the product \nmake sure it's valid and different from existing Barcodes\n");
 
 		scanf("%[^\n]s", temp);
 		getchar();
@@ -93,7 +94,7 @@ void getPrice(float* price)
 	} while (val <= 0);
 	
 	*price = val;
-	return 1;
+	
 }
 void getQuantity(int* quantity)
 {
@@ -106,7 +107,7 @@ void getQuantity(int* quantity)
 	} while (val <= 0);
 
 	*quantity = val;
-	return 1;
+	
 }
 void getProductName(char* pName)
 {
@@ -123,4 +124,15 @@ void getProductName(char* pName)
 	
 }
 
+void freeProduct(Product * p)
+{
+	/*
+	freeProduct
+
+	input: Product
+	output: free the space of Product elements
+	*/
+
+	free(p);
+}
 

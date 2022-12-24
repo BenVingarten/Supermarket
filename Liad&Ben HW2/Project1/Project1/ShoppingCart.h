@@ -10,7 +10,7 @@ typedef struct
 
 
 void initShoppingCart(ShoppingCart* shopCart);
-void printShoppingCart(ShoppingCart *pShopCart);
+void printShoppingCart(const  ShoppingCart *pShopCart);
 void freeShoppingCart(ShoppingCart *pShopCart);
 
 int addItemToShoppingCart(ShoppingCart* shopCart, Product* p);
@@ -19,4 +19,4 @@ int addNewShoppingItem(ShoppingCart* shopCart, ShoppingItem* pItem, Product* p);
 ShoppingItem* findBarCodeInCart(ShoppingCart* shopCart, char* barCode);
 int getAmount(Product* p);
 
-float getTotalSumOfCart(ShoppingCart* pShopCart);
+float getTotalSumOfCart(const ShoppingCart* pShopCart);
