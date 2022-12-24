@@ -109,7 +109,7 @@ void exitSuperMarket(SuperMarket * market)
 				}
 			}
 	
-	free(market);
+	freeSuperMarket(market);
 
 }
 
@@ -138,7 +138,7 @@ int addProductToSuperMarket(SuperMarket* market)
 			return 0;
 		
 
-		initProduct(p); // without barcode yet
+		initProduct(p); 
 		
 		while (isProductBarcodeExists(market, p->barCode))
 		{
@@ -309,7 +309,7 @@ void customerPay(SuperMarket * market, Customer* currentCustomer)
 		return;
 
 	//get amount of money customer wants to pay
-	float amount, customerBalance = getTotalSumOfCart(currentCustomer->cart);
+	float amount, customerBalance = currentCustomer->balance;
 	printf("Customer current balance is %f, please intsert the total sum you want to pay", customerBalance);
 	scanf("%f", &amount);
 	while(amount < 0)
@@ -319,13 +319,23 @@ void customerPay(SuperMarket * market, Customer* currentCustomer)
 	}
 
 	customerBalance -= amount;
-	if (customerBalance < 0)
+	
+	if (customerBalance <= 0)
 	{
-		float change = 0 - customerBalance;
-		customerBalance = 0;
-		printf("Your cahnge is %f ILS", change);
+
+		if (customerBalance < 0)
+		{
+			float change = 0 - customerBalance;
+			customerBalance = 0;
+			printf("Your change is %f ILS", change);
+		}
+			
+		freeShoppingCart(currentCustomer->cart);
+		//or currentCustomer->cart = NULL;
+		
 	}
 
+	
 	printf("Thanks for paying, your current balance is: %f", customerBalance);
 	currentCustomer->balance = customerBalance;
 
@@ -405,12 +415,11 @@ int purchase(SuperMarket* market)
 
 			if(!addItemToShoppingCart(currentCustomer->cart, p)) // adds new item to current customer's cart
 				printf("couldn't add the item, try again if you want! ");
-			else
-				currentCustomer->balance = getTotalSumOfCart(currentCustomer->cart);
 		}
 		
 	} while (keepBuying);
 
+	currentCustomer->balance = getTotalSumOfCart(currentCustomer->cart);
 	return 1;
 }
 
