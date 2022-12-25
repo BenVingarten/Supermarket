@@ -1,2 +1,12 @@
-﻿  Main.c
-  Project1.vcxproj -> C:\Users\bv080\OneDrive\מסמכים\GitHub\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppClean.targets(76,5): warning : Access to the path 'd:\c files\c hw2\c-work-liad-ben\liad&ben hw2\project1\debug\project1.exe' is denied.
+  Address.c
+  Customer.c
+  exe.c
+  GeneralFunc.c
+  Main.c
+  Product.c
+  ShoppingCart.c
+  ShoppingItem.c
+  SuperMarket.c
+  Generating Code...
+LINK : fatal error LNK1104: cannot open file 'D:\C Files\c hw2\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe'

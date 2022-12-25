@@ -37,7 +37,6 @@ int initSuperMarket(SuperMarket* market)
 
 
 }
-
 void printSuperMarket(const SuperMarket* market)
 {
 	printf("name: %s\naddress: ", market->name);
@@ -62,7 +61,6 @@ void printSuperMarket(const SuperMarket* market)
 	}
 	
 }
-
 void freeSuperMarket(SuperMarket* market)
 {
 	// free customers
@@ -85,7 +83,6 @@ void freeSuperMarket(SuperMarket* market)
 	free(market);
 
 }
-
 void exitSuperMarket(SuperMarket * market)
 {
 	/*
@@ -104,7 +101,7 @@ void exitSuperMarket(SuperMarket * market)
 			customerPay(market);
 		}
 	}
-	freeSuperMarket(&market);
+	freeSuperMarket(market);
 
 	/*
 		for (int i = 0; i < market->numOfCustomers; i++)
@@ -228,6 +225,7 @@ void printAllProductsByType(const SuperMarket* market)
 	if (!count)
 		printf("there are no products of this type in superMarket!\n");
 }
+
 void addCustomerToSuperMarket(SuperMarket* market)
 {
 	// show list of registerd customers for checks
@@ -387,6 +385,7 @@ Customer* customerSelect(const SuperMarket * market)
 	int customerIndex = customerNumber - 1;
 	return market->allCustomers[customerIndex];
 }
+
 int purchase(SuperMarket* market)
 {
 	
