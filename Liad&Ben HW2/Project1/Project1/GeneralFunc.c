@@ -69,7 +69,7 @@ char* createDynStr(const char* msg)
 {
 	char* str;
 	char temp[MAX_LENGTH];
-	getchar();
+	
 	do {
 
 		printf("Enter %s:\n", msg);

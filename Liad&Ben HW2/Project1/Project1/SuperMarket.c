@@ -65,12 +65,20 @@ void freeSuperMarket(SuperMarket* market)
 {
 	// free customers
 	for (int i = 0; i < market->numOfCustomers; i++)
+	{
 		freeCustomer(market->allCustomers[i]);
+		free(market->allCustomers[i]);
+	}
+
 	free(market->allCustomers);
 
 	//free products
 	for (int i = 0; i < market->numOfProducts; i++)
+	{
 		freeProduct(market->allProducts[i]);
+		free(market->allProducts[i]);
+	}
+
 	free(market->allProducts);
 	
 	//free address
@@ -78,9 +86,6 @@ void freeSuperMarket(SuperMarket* market)
 
 	//free name
 	free(market->name);
-
-	//free superMarket
-	free(market);
 
 }
 void exitSuperMarket(SuperMarket * market)
@@ -217,7 +222,7 @@ void printAllProductsByType(const SuperMarket* market)
 	int count = 0;
 	for (int i = 0; i < market->numOfProducts; i++)
 	{
-		if (!strcmp((char*)(market->allProducts[i]->productType), (char*)productType))
+		if (((int)(market->allProducts[i]->productType) == (int)productType))
 			printProduct(market->allProducts[i]);
 
 		count++;
@@ -322,7 +327,7 @@ void customerPay(SuperMarket* market)
 	if (!currentCustomer)		//message printed from customerSelect
 		return;
 	
-	if (!currentCustomer->cart)
+	if (!currentCustomer->balance)
 	{
 		printf("customer dont need to pay\n");
 		return;
@@ -353,7 +358,6 @@ void customerPay(SuperMarket* market)
 				printf("Your change is %f ILS, ", change);
 			}
 
-			
 			freeShoppingCart(currentCustomer->cart);
 			
 		}
@@ -373,7 +377,7 @@ Customer* customerSelect(const SuperMarket * market)
 	getListOfCustomers(market);		//if we want to print all customers
 
 
-	char* pName = getName("customer's name you want to choose");
+	char* pName = getName("customer's name you want to buy/pay");
 	int customerNumber = isCustomerExist(market, pName); //customer number = customer index + 1
 	while (!customerNumber)
 	{
@@ -386,12 +390,19 @@ Customer* customerSelect(const SuperMarket * market)
 	return market->allCustomers[customerIndex];
 }
 
-int purchase(SuperMarket* market)
+void purchase(SuperMarket* market)
 {
+	if (!market->numOfProducts)
+	{
+		printf("there are no products in superMarket\n");
+		return;
+	}
 	
 	Customer* currentCustomer = customerSelect(market);
+
 	if (!currentCustomer)		//message printed from customerSelect
-		return 0;
+		return;
+
 
 	// if customer has no cart yet
 	if (!currentCustomer->cart)
@@ -399,8 +410,7 @@ int purchase(SuperMarket* market)
 		initEmptyCart(currentCustomer);
 	}
 	
-	//show list of products
-	getListOfProducts(market);
+	
 
 	int keepBuying; // variable that will decide if to keep buy or not.
 	char* barcode; // getting user barcode's choice
@@ -408,10 +418,15 @@ int purchase(SuperMarket* market)
 	do
 	{
 		//get user choice if to keep buying or not
+
+		//show list of products
+		getListOfProducts(market);
+		
 		do
 		{
 			printf("if you want to add product to your cart enter 1 else enter 0\n");
 			scanf("%d", &keepBuying);
+			getchar();
 
 		} while(keepBuying < 0 || keepBuying > 1);
 		
@@ -419,7 +434,6 @@ int purchase(SuperMarket* market)
 		{
 			// get from user the product's barcode
 			barcode = getName("the product's barcode you want to add,make sure it exists");
-			getchar();
 			int productNumber = isProductBarcodeExists(market, barcode);
 
 			//while user selects non existing barcode keep getting new barcode
@@ -431,9 +445,14 @@ int purchase(SuperMarket* market)
 
 			int productIndex = productNumber - 1;
 			Product* p = market->allProducts[productIndex];
+			if (!p->quantity)
+			{
+				printf("product out of stock!\n");
+				return;
+			}
 
 			if(!addItemToShoppingCart(currentCustomer->cart, p)) // adds new item to current customer's cart
-				printf("couldn't add the item, try again if you want! ");
+				printf("couldn't add the item, try again if you want!\n");
 		}
 		
 	} while (keepBuying);

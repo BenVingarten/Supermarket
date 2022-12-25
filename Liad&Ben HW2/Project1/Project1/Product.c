@@ -59,6 +59,7 @@ Type getProductType()
 			printf("%d for %s\n", i, typeTitles[i]);
 		}
 			scanf("%d", &val);
+			getchar();
 
 	} while (val < 0 || val >= eNOfTypes);
 
@@ -74,7 +75,6 @@ void getBarCode(char* pBar)
 
 	do {
 		printf("please select a BarCode for the product \nmake sure it's valid and different from existing Barcodes\n");
-
 		scanf("%[^\n]s", temp);
 		getchar();
 

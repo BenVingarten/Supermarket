@@ -4,7 +4,7 @@
 
 void main()
 {
-	printf("please press ENTER to start!\n");
+	
 	SuperMarket market;
 	int initMarket = initSuperMarket(&market);
 
@@ -23,6 +23,7 @@ void main()
 		printf("7) Print all products of type \n8) EXIT\n");
 
 		scanf("%d", &selection);
+		getchar();
 		switch (selection)
 		{
 			case 1: //Print SuperMarket

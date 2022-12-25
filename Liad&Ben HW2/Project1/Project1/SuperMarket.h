@@ -30,7 +30,7 @@ int isCustomerExist(const SuperMarket* market, char* name);
 void printCustomerCart(const SuperMarket* market);
 void customerPay(SuperMarket* market);
 Customer* customerSelect(const SuperMarket* market);
-int purchase(SuperMarket* market);
+void purchase(SuperMarket* market);
 int NotEverybodyPaid(SuperMarket* market);
 
 

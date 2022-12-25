@@ -37,8 +37,11 @@ void freeShoppingCart(ShoppingCart *pShopCart)
 	*/
 
 	for (int i = 0; i < pShopCart->numOfDifferentItems; i++)
+	{
 		freeShoppingItem(pShopCart->items[i]);
-
+		//free(pShopCart->items[i]);
+	}
+		
 	free(pShopCart);
 
 }

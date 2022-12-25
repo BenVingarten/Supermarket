@@ -26,15 +26,14 @@ int initCustomer(Customer* customer)
 }
 void printCustomer(const Customer* customer)
 {
-	printf("customer's name: %s\n", customer->name);
+	printf("customer's name: %s | customer's balance: %f", customer->name,customer->balance);
 
 	if (customer->cart)
 	{
 		printShoppingCart(customer->cart);
-		printf("Customer Balance: %f\n", customer->balance);
 	}
 	else
-		printf("Cart hasnt been created yet, balance 0\n");
+		printf("Cart has'nt been created yet\n");
 }
 void freeCustomer(Customer* customer)
 {
