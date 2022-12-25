@@ -55,7 +55,7 @@ int isNameValid(char* str, int limit)
 char* getName(char * msg)
 {
 	char* str = malloc(sizeof(char) * MAX_LENGTH);
-	getchar();
+	
 	do {
 		printf("enter %s\n", msg);
 		scanf("%[^\n]s", str);

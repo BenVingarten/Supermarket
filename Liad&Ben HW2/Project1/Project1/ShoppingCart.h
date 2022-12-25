@@ -15,7 +15,7 @@ void freeShoppingCart(ShoppingCart *pShopCart);
 
 int addItemToShoppingCart(ShoppingCart* shopCart, Product* p);
 void addExistingShoppingItem(int amount, ShoppingItem* item, Product* p);
-int addNewShoppingItem(ShoppingCart* shopCart, ShoppingItem* pItem, Product* p,int amount);
+int addNewShoppingItem(ShoppingCart* ShopCart, Product* p, int amount);
 ShoppingItem* findBarCodeInCart(ShoppingCart* shopCart, char* barCode);
 int getAmount(Product* p);
 

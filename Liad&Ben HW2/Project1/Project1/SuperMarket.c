@@ -95,26 +95,37 @@ void exitSuperMarket(SuperMarket * market)
 	output: Can OR Cannot exit from program, (are al customers payed?)
 	*/
 	
-	if (market->numOfCustomers)
+	if (market->numOfCustomers > 0) //check if there are customers.
+	{
+		while(NotEverybodyPaid(market)) //checks if all customers paid
+		{
+			printf("there are still customers who hasnt paid:\n");
+			getListOfCustomerWhoNeedsToPay(market);
+			customerPay(market);
+		}
+	}
+	freeSuperMarket(&market);
+
+	/*
 		for (int i = 0; i < market->numOfCustomers; i++)
 			if (market->allCustomers[i]->balance)
 			{
-				printf("Customer: %s didnt pay his balance. Please pay: \n", market->allCustomers[i]->name);
+				printf("Customer: %s didnt pay his balance. Please pay:\n", market->allCustomers[i]->name);
 				while (market->allCustomers[i]->balance)
 				{
 					customerPay(market, market->allCustomers[i]);
 					
 					if (market->allCustomers[i]->balance)
-						printf("There is more to pay: ");
+						printf("There is more to pay:\n");
 				}
 			}
+	*/
 	
-	freeSuperMarket(market);
 
 }
 
 
-int addProductToSuperMarket(SuperMarket* market)
+void addProductToSuperMarket(SuperMarket* market)
 {
 	// show user all products in superMarket
 	getListOfProducts(market);
@@ -134,8 +145,11 @@ int addProductToSuperMarket(SuperMarket* market)
 	if (!val)
 	{
 		Product* p = (Product*) malloc(sizeof(Product));
-		if (!p)
-			return 0;
+		if (!p) 
+		{
+			printf("failed to add prouct, try again\n");
+			return;
+		}
 		
 
 		initProduct(p); 
@@ -144,7 +158,7 @@ int addProductToSuperMarket(SuperMarket* market)
 		{
 			printf("there is already Barcode like this, try again\n");
 			getBarCode(p->barCode);
-
+			
 		}
 			
 		 
@@ -152,7 +166,11 @@ int addProductToSuperMarket(SuperMarket* market)
 		// allocate new memory for new product and add the new product.
 		market->allProducts = (Product**)realloc(market->allProducts, (market->numOfProducts + 1) * sizeof(Product*));
 		if (!market->allProducts)
-			return 0;
+		{
+			printf("failed to add prouct, try again\n");
+			return;
+		}
+			
 
 		market->allProducts[market->numOfProducts++] = p;
 	}
@@ -169,9 +187,8 @@ int addProductToSuperMarket(SuperMarket* market)
 		market->allProducts[val - 1]->quantity += amount;
 	}
 
-	return 1;
+	
 }
-
 void getListOfProducts(const SuperMarket* market)
 {
 	if (!market->allProducts)
@@ -188,7 +205,6 @@ void getListOfProducts(const SuperMarket* market)
 	}
 
 }
-
 int isProductBarcodeExists(SuperMarket* market, char* barCode)
 {
 	for (int i = 0; i < market->numOfProducts; i++)
@@ -198,7 +214,6 @@ int isProductBarcodeExists(SuperMarket* market, char* barCode)
 	}
 	return 0;
 }
-
 void printAllProductsByType(const SuperMarket* market)
 {
 	Type productType = getProductType();
@@ -213,24 +228,25 @@ void printAllProductsByType(const SuperMarket* market)
 	if (!count)
 		printf("there are no products of this type in superMarket!\n");
 }
-
-
-int addCustomerToSuperMarket(SuperMarket* market)
+void addCustomerToSuperMarket(SuperMarket* market)
 {
 	// show list of registerd customers for checks
 	//getListOfCustomers(market);
 
 	Customer* c = (Customer*)malloc(sizeof(Customer));
 	if (!c)
-		return 0;
+	{
+		printf("failed to add Customer, try again\n");
+		return;
+	}
 	
 	// init new customer and check if his name is already in registerd customers. 
 	//if name exists free it before getting a new one
 
 	if (!initCustomer(c))
 	{
-		printf("failed to allocate memory\n");
-		return 0;
+		printf("failed to add Customer, try again\n");
+		return;
 	}
 
 	while (isCustomerExist(market, c->name))
@@ -238,20 +254,21 @@ int addCustomerToSuperMarket(SuperMarket* market)
 		free(c->name);
 		if (!initCustomer(c))
 		{
-			printf("failed to allocate memory\n");
-			return 0;
+			printf("failed to add Customer, try again\n");
+			return;
 		}
 	}
 	
 	market->allCustomers = (Customer**)realloc(market->allCustomers, (market->numOfCustomers + 1) * sizeof(Customer*));
 	if (!market->allCustomers)
-		return 0;
+	{
+		printf("failed to add Customer, try again\n");
+		return;
+	}
 
 	market->allCustomers[market->numOfCustomers++] = c;
 
-	return 1;
 }
-
 void getListOfCustomers(const SuperMarket* market)
 {
 	if (!market->allCustomers)
@@ -262,12 +279,11 @@ void getListOfCustomers(const SuperMarket* market)
 		for (int i = 0; i < market->numOfCustomers; i++)
 		{
 			printf("%d) ", (i + 1));
-			printCustomer(market->allCustomers[i]);
+			printf("%s\n", market->allCustomers[i]->name);
 		}
 
 	}
 }
-
 int isCustomerExist(const SuperMarket* market, char* name)
 {
 	for (int i = 0; i < market->numOfCustomers; i++)
@@ -277,7 +293,6 @@ int isCustomerExist(const SuperMarket* market, char* name)
 	}
 	return 0;
 }
-
 void printCustomerCart(const SuperMarket * market)
 {
 	/*
@@ -295,8 +310,7 @@ void printCustomerCart(const SuperMarket * market)
 	
 	
 }
-
-void customerPay(SuperMarket * market)
+void customerPay(SuperMarket* market)
 {
 	/*
 	customerPay
@@ -304,45 +318,52 @@ void customerPay(SuperMarket * market)
 	input: SuperMarket
 	output: pay selected costumer cart or some of it
 	*/
+	Customer* currentCustomer;
 
-	Customer* currentCustomer = customerSelect(market);
+	currentCustomer = customerSelect(market);
 	if (!currentCustomer)		//message printed from customerSelect
 		return;
+	
+	if (!currentCustomer->cart)
+	{
+		printf("customer dont need to pay\n");
+		return;
+	}
 
 	//get amount of money customer wants to pay
 	float amount, customerBalance = currentCustomer->balance;
-	printf("Customer current balance is %f, please intsert the total sum you want to pay", customerBalance);
-	scanf("%f", &amount);
-	while(amount < 0)
+	
+
+	while (customerBalance > 0)
 	{
-		printf("Invalid amount of money, try again: ");
+		printf("Customer current balance is %f, please insert the balance to pay\n", customerBalance);
 		scanf("%f", &amount);
-	}
-
-	customerBalance -= amount;
-	
-	if (customerBalance <= 0)
-	{
-
-		if (customerBalance < 0)
+		while (amount < 0)
 		{
-			float change = 0 - customerBalance;
-			customerBalance = 0;
-			printf("Your change is %f ILS", change);
+			printf("Invalid amount of money, try again: ");
+			scanf("%f", &amount);
 		}
+
+		customerBalance -= amount;
+		if (customerBalance <= 0)
+		{
+
+			if (customerBalance < 0)
+			{
+				float change = 0 - customerBalance;
+				customerBalance = 0;
+				printf("Your change is %f ILS, ", change);
+			}
+
 			
-		freeShoppingCart(currentCustomer->cart);
-		//or currentCustomer->cart = NULL;
-		
+			freeShoppingCart(currentCustomer->cart);
+			
+		}
 	}
-
 	
-	printf("Thanks for paying, your current balance is: %f", customerBalance);
+	printf("Thanks for paying, your current balance is: %f\n", customerBalance);
 	currentCustomer->balance = customerBalance;
-
-	
 }
-
 Customer* customerSelect(const SuperMarket * market)
 {
 	if (!market->numOfCustomers)
@@ -359,15 +380,13 @@ Customer* customerSelect(const SuperMarket * market)
 	while (!customerNumber)
 	{
 		printf("there is no customer with this name\n");
-		pName = getName("customer's name you want to buy with");
+		pName = getName("customer's name you want to buy/pay with");
 		customerNumber = isCustomerExist(market, pName);
 	}
 
 	int customerIndex = customerNumber - 1;
 	return market->allCustomers[customerIndex];
 }
-
-
 int purchase(SuperMarket* market)
 {
 	
@@ -401,6 +420,7 @@ int purchase(SuperMarket* market)
 		{
 			// get from user the product's barcode
 			barcode = getName("the product's barcode you want to add,make sure it exists");
+			getchar();
 			int productNumber = isProductBarcodeExists(market, barcode);
 
 			//while user selects non existing barcode keep getting new barcode
@@ -422,6 +442,23 @@ int purchase(SuperMarket* market)
 	currentCustomer->balance = getTotalSumOfCart(currentCustomer->cart);
 	return 1;
 }
+void getListOfCustomerWhoNeedsToPay(SuperMarket* market)
+{
+	for (int i = 0; i < market->numOfCustomers; i++)
+	{
+		if (market->allCustomers[i]->balance > 0)
+		{
+			printf("%s, balance: %f\n", market->allCustomers[i]->name, market->allCustomers[i]->balance);
+		}
+	}
+}
+int NotEverybodyPaid(SuperMarket* market)
+{
+	for (int i = 0; i < market->numOfCustomers; i++)
+	{
+		if (market->allCustomers[i]->balance > 0)
+			return 1;
+	}
 
-
-	
+	return 0;
+}

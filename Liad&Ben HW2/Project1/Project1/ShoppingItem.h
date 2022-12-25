@@ -9,6 +9,6 @@ typedef struct
 
 }ShoppingItem;
 
-int initShoppingItem(Product *product, ShoppingItem *pShoppingItem, int amount);
+void initShoppingItem(Product *product, ShoppingItem* pShoppingItem, int amount);
 void printShoppingItem(ShoppingItem* item);
 void freeShoppingItem(ShoppingItem *pItem);

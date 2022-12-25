@@ -64,9 +64,7 @@ int addItemToShoppingCart(ShoppingCart* pShopCart, Product* p)
 
 	if (!pItem)	//if item is not in cart	
 	{
-		
-		
-		if(!addNewShoppingItem(pShopCart, pItem, p, amount)) 
+		if(!addNewShoppingItem(pShopCart,p, amount)) 
 		{
 			freeShoppingItem(pItem);		//if couldn't find place for shopping item OR bigger shopping cart - free the new shopping item
 			return 0;
@@ -95,7 +93,7 @@ void addExistingShoppingItem(int amount, ShoppingItem* pItem, Product* p)
 
 }
 
-int addNewShoppingItem(ShoppingCart* ShopCart, ShoppingItem* pItem, Product* p, int amount)
+int addNewShoppingItem(ShoppingCart* ShopCart, Product* p, int amount)
 {
 	/*
 	addNewShoppingItem
@@ -105,9 +103,13 @@ int addNewShoppingItem(ShoppingCart* ShopCart, ShoppingItem* pItem, Product* p, 
 			**remember amount is in the new item amount and already been chacked**
 	*/	
 
-	
-	if (initShoppingItem(p, pItem, amount)) // allocate new shopping item
+	// allocate new shopping item
+	ShoppingItem* pItem = (ShoppingItem*)malloc(sizeof(ShoppingItem)); 
+	if (!pItem)
 		return 0;
+
+	initShoppingItem(p, pItem, amount); 
+		
 
 	ShopCart->items = (ShoppingItem**)realloc(ShopCart->items, sizeof(ShoppingItem*) * ((ShopCart->numOfDifferentItems) + 1 ));
 	if (!ShopCart->items)		//if not succeeded to fine place in memory
@@ -115,7 +117,7 @@ int addNewShoppingItem(ShoppingCart* ShopCart, ShoppingItem* pItem, Product* p, 
 
 	ShopCart->items[ShopCart->numOfDifferentItems++] = pItem;	//if succeeded add to cart
 
-	p->quantity -= pItem->amount;
+	p->quantity -= pItem->amount; //update product quantity
 
 	return 1;
 }

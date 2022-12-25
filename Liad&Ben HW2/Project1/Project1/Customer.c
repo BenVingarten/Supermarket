@@ -59,4 +59,4 @@ int initEmptyCart(Customer* customer)
 	initShoppingCart(customer->cart);
 	return 1;
 }
-	
+

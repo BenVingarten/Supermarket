@@ -8,7 +8,7 @@
 
 
 
-int initShoppingItem(Product *product, ShoppingItem *pShoppingItem, int amount)
+void initShoppingItem(Product *product, ShoppingItem* pShoppingItem, int amount)
 {
 	/*
 	initShoppingItem
@@ -16,15 +16,12 @@ int initShoppingItem(Product *product, ShoppingItem *pShoppingItem, int amount)
 	input: Product and Shopping item
 	output: points the shoppingItem values to the product values
 	*/
-	pShoppingItem = (ShoppingItem*)malloc(sizeof(ShoppingItem));
-	if (!pShoppingItem)
-		return 0;
-	
+
 	strcpy(pShoppingItem->BarCode, product->barCode);
 	pShoppingItem->price = product->price;
 	pShoppingItem->amount = amount;
 	
-	return 1;
+
 }
 void printShoppingItem(ShoppingItem* item)
 {
