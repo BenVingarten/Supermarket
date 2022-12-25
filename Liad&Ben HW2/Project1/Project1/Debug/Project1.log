@@ -1,6 +1,12 @@
-﻿  Main.c
+﻿  Address.c
+  Customer.c
+  exe.c
+  GeneralFunc.c
+  Main.c
   Product.c
+  ShoppingCart.c
+  ShoppingItem.c
   SuperMarket.c
-c:\users\bv080\onedrive\מסמכים\github\c-work-liad-ben\liad&ben hw2\project1\project1\supermarket.c(461): warning C4098: 'purchase': 'void' function returning a value
+d:\c files\c hw2\c-work-liad-ben\liad&ben hw2\project1\project1\supermarket.c(461): warning C4098: 'purchase': 'void' function returning a value
   Generating Code...
-  Project1.vcxproj -> C:\Users\bv080\OneDrive\מסמכים\GitHub\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe
+LINK : fatal error LNK1104: cannot open file 'D:\C Files\c hw2\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe'
