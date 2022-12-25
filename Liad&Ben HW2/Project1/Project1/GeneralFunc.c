@@ -49,6 +49,7 @@ int isNameValid(char* str, int limit)
 {
 	if (!strlen(str) || (int)strlen(str) > limit)
 		return 0;
+		
 	return 1;
 }
 char* getName(char * msg)

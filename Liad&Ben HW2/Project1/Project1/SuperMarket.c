@@ -296,7 +296,7 @@ void printCustomerCart(const SuperMarket * market)
 	
 }
 
-void customerPay(SuperMarket * market, Customer* currentCustomer)
+void customerPay(SuperMarket * market)
 {
 	/*
 	customerPay
@@ -305,6 +305,7 @@ void customerPay(SuperMarket * market, Customer* currentCustomer)
 	output: pay selected costumer cart or some of it
 	*/
 
+	Customer* currentCustomer = customerSelect(market);
 	if (!currentCustomer)		//message printed from customerSelect
 		return;
 
@@ -342,11 +343,11 @@ void customerPay(SuperMarket * market, Customer* currentCustomer)
 	
 }
 
-Customer * customerSelect(const SuperMarket * market)
+Customer* customerSelect(const SuperMarket * market)
 {
 	if (!market->numOfCustomers)
 	{
-		printf("No custumers");
+		printf("there are no Customers\n");
 		return NULL;
 	}
 	
@@ -393,7 +394,6 @@ int purchase(SuperMarket* market)
 		{
 			printf("if you want to add product to your cart enter 1 else enter 0\n");
 			scanf("%d", &keepBuying);
-			getchar();
 
 		} while(keepBuying < 0 || keepBuying > 1);
 		

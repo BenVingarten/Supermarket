@@ -4,10 +4,16 @@
 
 void main()
 {
-	printf("Press ENTER to start: \n");
+	printf("please press ENTER to start!\n");
 	SuperMarket market;
-	initSuperMarket(&market);
+	int initMarket = initSuperMarket(&market);
 
+	while (!initMarket)
+	{
+		printf("there was a problem allocating memory for supermarket, trying again\n");
+		initMarket = initSuperMarket(&market);
+	}
+	
 	int selection = 0;
 	
 	do
@@ -17,7 +23,6 @@ void main()
 		printf("7) Print all products of type \n8) EXIT\n");
 
 		scanf("%d", &selection);
-
 		switch (selection)
 		{
 			case 1: //Print SuperMarket
@@ -41,12 +46,9 @@ void main()
 				break;
 
 			case 6:	//Customer Pay
-			{
-				Customer* currentCustomer = customerSelect(&market);
-				customerPay(&market, currentCustomer);
-			}
+				customerPay(&market);
 				break;
-
+			
 			case 7:	//Print all products of type
 				printAllProductsByType(&market);
 				break;
