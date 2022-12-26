@@ -35,14 +35,16 @@ void freeShoppingCart(ShoppingCart *pShopCart)
 	input: Shopping cart
 	output: free the space of shopping cart and whats inside (items)
 	*/
+	if (!pShopCart)
+		return;
 
 	for (int i = 0; i < pShopCart->numOfDifferentItems; i++)
 	{
 		freeShoppingItem(pShopCart->items[i]);
-		//free(pShopCart->items[i]);
 	}
 		
 	free(pShopCart);
+	
 
 }
 

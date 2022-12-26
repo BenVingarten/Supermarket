@@ -26,7 +26,7 @@ int initCustomer(Customer* customer)
 }
 void printCustomer(const Customer* customer)
 {
-	printf("customer's name: %s | customer's balance: %f", customer->name,customer->balance);
+	printf("customer's name: %s | customer's balance: %f, ", customer->name,customer->balance);
 
 	if (customer->cart)
 	{
@@ -44,8 +44,9 @@ void freeCustomer(Customer* customer)
 	output: free the space of shopping cart (which free the items in it) and name
 	*/
 
+	if(customer->cart )
+		freeShoppingCart(customer->cart);
 
-	freeShoppingCart(customer->cart);
 	free(customer->name);
 }
 int initEmptyCart(Customer* customer)

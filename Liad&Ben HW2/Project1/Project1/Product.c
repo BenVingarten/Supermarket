@@ -25,7 +25,7 @@ int isBarCodeValid(char* str)
 			return 0;
 
 		if (isalpha(str[i]) && !isupper(str[i]))
-			str[i] = toupper(str[i]);
+			return 0;
 
 		if (isdigit(str[i]) && (i == 0 || i == BARCODE_LEN - 2))
 			return 0;
