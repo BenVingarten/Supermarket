@@ -98,13 +98,15 @@ void exitSuperMarket(SuperMarket * market)
 	
 	if (market->numOfCustomers > 0) //check if there are customers.
 	{
-		while(NotEverybodyPaid(market)) //checks if all customers paid
+		/*while(NotEverybodyPaid(market)) //checks if all customers paid
 		{
 			printf("there are still customers who hasnt paid:\n");
 			printf("\n");
 			getListOfCustomerWhoNeedsToPay(market);
 			customerPay(market);
 		}
+		*/
+		getListOfCustomerWhoNeedsToPay(market);
 	}
 	freeSuperMarket(market);
 
