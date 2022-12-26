@@ -29,7 +29,7 @@ int initAddress(Address* address)
 	char insertedAdd[MAX_LENGTH];
 	int numOfDel;
 
-	printf("Please enter address by the next format: street#number#city \nMax Lenght is 254 & no spaces with the number\n");
+	printf("Enter address data by the next format: street#number#city \nNo spaces with the number\n");
 	myGets(insertedAdd, MAX_LENGTH);
 	numOfDel = countCharInString(insertedAdd, '#');
 
