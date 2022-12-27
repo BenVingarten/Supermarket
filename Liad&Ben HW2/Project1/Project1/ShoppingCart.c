@@ -22,8 +22,12 @@ void printShoppingCart(const ShoppingCart* pShopCart)
 	printf("There are %d items in cart\n", pShopCart->numOfDifferentItems);
 
 	for (int i = 0; i < pShopCart->numOfDifferentItems; i++)
+	{
+		printf("%d) ", (i + 1));
 		printShoppingItem(pShopCart->items[i]);
 		printf("\n");
+	}
+		
 		
 }
 

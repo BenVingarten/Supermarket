@@ -86,9 +86,10 @@ void exitSuperMarket(SuperMarket * market)
 	
 	if (market->numOfCustomers > 0) //check if there are customers.
 	{
-		
-		getListOfCustomers(market);
-		getListOfCustomerWhoNeedsToPay(market);
+		if (!isEverybodyPaid)
+			getListOfCustomerWhoNeedsToPay(market);
+
+		printf("Closing SuperMarket, see you next time!!\n");
 	}
 	freeSuperMarket(market);
 
@@ -121,7 +122,7 @@ void addProductToSuperMarket(SuperMarket* market)
 	// get the user's choice, and check if his answer is valid.
 	do {
 
-		printf("1) To add a new product press 0 \n2) To add existing prodcut enter its number in list\n");
+		printf("* To add a new product press 0 \n* To add existing prodcut enter its number in list\n");
 		scanf("%d", &val);
 		getchar();
 
@@ -185,7 +186,11 @@ void getListOfProducts(const SuperMarket* market)
 		printf("\tname\t\tbarcode\t\ttype\t\tprice\t\tquantity\n");
 		printf("------------------------------------------------------------------------------------------\n");
 		for (int i = 0; i < market->numOfProducts; i++)
+		{
+			printf("%d) ", (i + 1));
 			printProduct(market->allProducts[i]);
+		}
+			
 			
 	}
 
@@ -238,6 +243,7 @@ void addCustomerToSuperMarket(SuperMarket* market)
 
 	while (isCustomerExist(market, c->name))
 	{
+		printf("There is already a customer with that name\n");
 		free(c->name);
 		if (!initCustomer(c))
 		{
@@ -382,7 +388,15 @@ void getListOfCustomerWhoNeedsToPay(SuperMarket* market)
 		}
 	}
 }
-
+int isEverybodyPaid(SuperMarket* market)
+{
+	for (int i = 0; i < market->numOfCustomers; i++)
+	{
+		if (market->allCustomers[i]->balance > 0)
+			return 1;
+	}
+	return 0;
+}
 void purchase(SuperMarket* market)
 {
 	if (!market->numOfProducts)
@@ -415,11 +429,13 @@ void purchase(SuperMarket* market)
 		//show list of products
 		getListOfProducts(market);
 		
-		
-		printf("press: \n1 - To add product to your cart enter \nAnything else to exit\n");
-		scanf("%d", &keepBuying);
-		getchar();
-		keepBuying = (keepBuying == 1);
+		do {
+
+			printf("press: \n1 - To add product to your cart enter \n0 - to exit\n");
+			scanf("%d", &keepBuying);
+			getchar();
+
+		} while (keepBuying < 0 || keepBuying > 1);
 
 		if (keepBuying)
 		{
@@ -439,11 +455,13 @@ void purchase(SuperMarket* market)
 			if (!p->quantity)
 			{
 				printf("\t~Product out of stock!~\n");
-				return;
 			}
 
-			if(!addItemToShoppingCart(currentCustomer->cart, p)) // adds new item to current customer's cart
-				printf("\t~Couldn't add the item, try again if you want~\n");
+			else if (!addItemToShoppingCart(currentCustomer->cart, p)) // adds new item to current customer's cart
+				printf("\t~invalid amount, Couldn't add the item, try again~\n");
+
+			else
+				printf("\t~product added successfully~\n");
 		}
 		
 	} while (keepBuying);

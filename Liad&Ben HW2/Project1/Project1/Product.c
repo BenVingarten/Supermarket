@@ -67,7 +67,7 @@ Type getProductType()
 }
 void printProduct(const Product* product)
 {
-	printf("%12s  %16s  %14s  %12.2f  %14d\n", product->name, product->barCode, typeTitles[product->productType], product->price, product->quantity);
+	printf("%10s  %16s  %14s  %12.2f  %14d\n", product->name, product->barCode, typeTitles[product->productType], product->price, product->quantity);
 }
 void getBarCode(char* pBar)
 {
