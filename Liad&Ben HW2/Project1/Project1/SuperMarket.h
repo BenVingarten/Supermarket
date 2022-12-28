@@ -33,8 +33,7 @@ void printCustomerCart(const SuperMarket* market);
 
 void customerPay(SuperMarket* market);
 Customer* customerSelect(const SuperMarket* market);
-int isEverybodyPaid(SuperMarket* market);
 void purchase(SuperMarket* market);
-//int NotEverybodyPaid(SuperMarket* market);
+
 
 

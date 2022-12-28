@@ -1,12 +1,5 @@
-﻿  Address.c
-  Customer.c
-  GeneralFunc.c
-  Main.c
+﻿  Main.c
   Product.c
-  ShoppingCart.c
-  ShoppingItem.c
   SuperMarket.c
-d:\c files\c hw2\c-work-liad-ben\liad&ben hw2\project1\project1\supermarket.c(89): warning C4550: expression evaluates to a function which is missing an argument list
-  exe.c
   Generating Code...
   Project1.vcxproj -> D:\C Files\c hw2\C-work-Liad-Ben\Liad&Ben HW2\Project1\Debug\Project1.exe

@@ -32,18 +32,29 @@ int countCharInString(const char* str, char c)
 	return counter;
 
 }
-void fixUpperAndLowerCase(char* str)
+int checkAndUpdateString(char* str)
 {
-	int i = 0;
-	while (str[i] != '\0')
+	int countAlphas = 0, countNotAlphas = 0, index = 0;
+	while (str[index] != '\0' && countNotAlphas < strlen(str) )
 	{
-		if (isalpha(str[i]))
-			if (i == 0 && !isupper(str[i]))
-				str[i] = toupper(str[i]);
-			else if (i > 0 && isupper(str[i]))
-				str[i] = tolower(str[i]);
-		i++;
+		if (isalpha(str[index]))
+		{
+
+			if (countAlphas == 0 && !isupper(str[index]))
+				str[index] = toupper(str[index]);
+			else if (countAlphas > 0 && isupper(str[index]))
+				str[index] = tolower(str[index]);
+			countAlphas++;
+		}
+		else
+			countNotAlphas++;
+
+		index++;
 	}
+	if (countAlphas == 0)
+		return 0;
+
+	return 1;
 }
 int isNameValid(char* str, int limit)
 {

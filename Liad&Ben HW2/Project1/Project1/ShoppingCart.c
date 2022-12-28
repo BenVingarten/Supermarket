@@ -63,8 +63,7 @@ int addItemToShoppingCart(ShoppingCart* pShopCart, Product* p)
 	*/
 	
 	int amount = getAmount(p);
-	if (!amount)	//if asked for more than available
-		return 0;
+	
 
 	//check if item is in already in cart by barcode
 	ShoppingItem* pItem; 
@@ -158,12 +157,16 @@ int getAmount(Product* p)
 	output: return the amount wanted from the product (NULL if more then product quantity)
 	*/
 
+	
+	
 	int val;
 	printf("enter How many items of this type would you like in the cart\nin stock there are only %d\n", p->quantity);
 	scanf("%d", &val);
-
-	if (val > p->quantity || val < 0)
-		return 0;
+	while (val > p->quantity || val < 0)
+	{
+		printf("\t~%s Try again~\n", (val < 0) ? ("Amount couldn't be less than 0!"):("Not enough in stock!") );
+		scanf("%d", &val);
+	}
 
 	return val;
 

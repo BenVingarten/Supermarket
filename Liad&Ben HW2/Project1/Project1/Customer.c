@@ -26,7 +26,7 @@ int initCustomer(Customer* customer)
 }
 void printCustomer(const Customer* customer)
 {
-	printf("customer's name: %s | customer's balance: %f, ", customer->name,customer->balance);
+	printf("customer's name: %s | customer's balance: %.2f, ", customer->name,customer->balance);
 
 	if (customer->cart)
 	{

@@ -4,7 +4,7 @@
 
 char* myGets(char* buf, int size);
 int countCharInString(const char* str, char c);
-void fixUpperAndLowerCase(char* str);
+int checkAndUpdateString(char* str);
 char*	createDynStr(const char* msg);
 int isNameValid(char* str, int limit);
 char* getName(char* msg);

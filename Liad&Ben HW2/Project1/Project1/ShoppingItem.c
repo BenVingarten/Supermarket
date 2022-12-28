@@ -25,7 +25,7 @@ void initShoppingItem(Product *product, ShoppingItem* pShoppingItem, int amount)
 }
 void printShoppingItem(ShoppingItem* item)
 {
-	printf("barcode: %s price: %f amount: %d\n", item->BarCode, item->price, item->amount);
+	printf("barcode: %s price: %.2f amount: %d\n", item->BarCode, item->price, item->amount);
 }
 void freeShoppingItem(ShoppingItem *pItem) 
 {

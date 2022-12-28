@@ -10,6 +10,6 @@ typedef struct
 } Address;
 
 int initAddress(Address* address);
-void fixAddressFormat(Address* address);
+int fixAddressFormat(char* street, char* city);
 void freeAddress(Address* address);
 void printAddress(const Address* address);

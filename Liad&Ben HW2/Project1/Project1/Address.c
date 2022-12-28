@@ -17,10 +17,17 @@ void freeAddress(Address* address)
 	free(address->street);
 	free(address->city);
 }
-void fixAddressFormat(Address* address)
+int fixAddressFormat(char* street, char* city) 
 {
-	fixUpperAndLowerCase(address->street);
-	fixUpperAndLowerCase(address->city);
+	int isAble = 0;
+	isAble = checkAndUpdateString(street);
+	if (!isAble)
+		return 0;
+	isAble = checkAndUpdateString(city);
+	if (!isAble)
+		return 0;
+
+	return 1;
 }
 int initAddress(Address* address)
 {
@@ -48,13 +55,16 @@ int initAddress(Address* address)
 		temp = strtok(NULL, del);
 	}
 
+	if (!fixAddressFormat(addressParts[0], addressParts[2]))
+		return 0;
+	
 	// allocate Street
 	address->street = (char*)malloc(sizeof(char) * (strlen(addressParts[0]) + 1));
 	if (!address->street)
 		return 0;
 
 	strcpy(address->street, addressParts[0]);
-
+	
 	// initiallize homeNumber
 	int num = atoi(addressParts[1]);
 	if (!num)
@@ -67,7 +77,7 @@ int initAddress(Address* address)
 		return 0;
 	strcpy(address->city, addressParts[2]);
 
-	fixAddressFormat(address);
+
 	return 1;
 	
 }
