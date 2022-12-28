@@ -1,4 +1,9 @@
+
 #define _CRT_SECURE_NO_WARNINGS
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 #include "SuperMarket.h"
 #include <stdio.h>
 
@@ -67,7 +72,8 @@ void main()
 	} while (selection != 8);
 
 	
-	
+	_CrtDumpMemoryLeaks();
+
 
 	
 }

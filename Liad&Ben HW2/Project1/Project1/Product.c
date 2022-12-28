@@ -132,7 +132,7 @@ void freeProduct(Product * p)
 	input: Product
 	output: free the space of Product elements
 	*/
-
+	
 	free(p);
 }
 
