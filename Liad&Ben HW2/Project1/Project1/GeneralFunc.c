@@ -35,7 +35,7 @@ int countCharInString(const char* str, char c)
 int checkAndUpdateString(char* str)
 {
 	int countAlphas = 0, countNotAlphas = 0, index = 0;
-	while (str[index] != '\0' && countNotAlphas < strlen(str) )
+	while (str[index] != '\0' && countNotAlphas < (int)strlen(str) )
 	{
 		if (isalpha(str[index]))
 		{
