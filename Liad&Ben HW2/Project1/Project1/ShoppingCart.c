@@ -73,10 +73,7 @@ int addItemToShoppingCart(ShoppingCart* pShopCart, Product* p)
 	if (!pItem)	//if item is not in cart	
 	{
 		if(!addNewShoppingItem(pShopCart,p, amount)) 
-		{
-			freeShoppingItem(pItem);		//if couldn't find place for shopping item OR bigger shopping cart - free the new shopping item
 			return 0;
-		}
 	}
 	else
 		addExistingShoppingItem(amount, pItem, p);
@@ -121,7 +118,10 @@ int addNewShoppingItem(ShoppingCart* ShopCart, Product* p, int amount)
 
 	ShopCart->items = (ShoppingItem**)realloc(ShopCart->items, sizeof(ShoppingItem*) * ((ShopCart->numOfDifferentItems) + 1 ));
 	if (!ShopCart->items)		//if not succeeded to fine place in memory
+	{
+		freeShoppingItem(pItem);
 		return 0;
+	}
 
 	ShopCart->items[ShopCart->numOfDifferentItems++] = pItem;	//if succeeded add to cart
 

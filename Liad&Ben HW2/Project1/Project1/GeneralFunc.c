@@ -63,7 +63,7 @@ int isNameValid(char* str, int limit)
 		
 	return 1;
 }
-char* getName(char * msg)
+/*char* getName(char * msg)
 {
 	char* str = malloc(sizeof(char) * MAX_LENGTH);
 	
@@ -75,14 +75,13 @@ char* getName(char * msg)
 	} while (!isNameValid(str, MAX_LENGTH - 1));
 	
 	return str;
-}
+}*/
 char* createDynStr(const char* msg)
 {
 	char* str;
 	char temp[MAX_LENGTH];
 	
 	do {
-
 		printf("Enter %s:\n", msg);
 		scanf("%[^\n]s", temp);
 		getchar();
@@ -91,7 +90,10 @@ char* createDynStr(const char* msg)
 
 	str = (char*)malloc((strlen(temp) + 1) * sizeof(char));
 	if (!str)
+	{
+		printf("Couldn't allocate memory for dynamic %s \n", msg);
 		return NULL;
+	}
 
 	strcpy(str, temp);
 	return str;

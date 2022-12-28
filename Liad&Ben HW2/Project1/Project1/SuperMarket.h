@@ -22,8 +22,9 @@ void exitSuperMarket(SuperMarket* market);
 
 void addProductToSuperMarket(SuperMarket* market);
 void getListOfProducts(const SuperMarket* market);
-int isProductBarcodeExists(SuperMarket* market, char* barCode);
+int isProductBarcodeExists(const SuperMarket* market, char* barCode);
 void printAllProductsByType(const SuperMarket* market);
+int productSelect(const SuperMarket* market);
 
 void addCustomerToSuperMarket(SuperMarket* market);
 void getListOfCustomers(const SuperMarket* market);

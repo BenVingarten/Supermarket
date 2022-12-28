@@ -194,7 +194,7 @@ void getListOfProducts(const SuperMarket* market)
 	}
 
 }
-int isProductBarcodeExists(SuperMarket* market, char* barCode)
+int isProductBarcodeExists(const SuperMarket* market, char* barCode)
 {
 	for (int i = 0; i < market->numOfProducts; i++)
 	{
@@ -220,6 +220,22 @@ void printAllProductsByType(const SuperMarket* market)
 	}
 	if (!count)
 		printf("there are no products of this type in superMarket!\n");
+}
+int productSelect(const SuperMarket * market)
+{
+	char* barcode; // getting user barcode's choice
+	int productNumber;
+	do
+	{
+		barcode = createDynStr("product's barcode");
+		if (!barcode)
+			return -1;
+		productNumber = isProductBarcodeExists(market, barcode);
+		free(barcode);
+	} while (!productNumber);
+
+
+	return productNumber;
 }
 
 void addCustomerToSuperMarket(SuperMarket* market)
@@ -335,20 +351,30 @@ Customer* customerSelect(const SuperMarket * market)
 {
 	if (!market->numOfCustomers)
 	{
-		printf("there are no Customers\n");
+		printf("There are no Customers\n");
 		return NULL;
 	}
 	
 	getListOfCustomers(market);	
 	
-	char* pName = getName("customer's name");
+
+
+
+	char* pName = createDynStr("customer's name");
+	if (!pName)
+		return NULL;
 	int customerNumber = isCustomerExist(market, pName); //customer number = customer index + 1
 	while (!customerNumber)
 	{
-		printf("there is no customer with this name\n");
-		pName = getName("customer's name you want to choose");
+		free(pName);
+		printf("There is no customer with this name\n");
+		pName = createDynStr("customer's name");
+		if (!pName)
+			return NULL;
 		customerNumber = isCustomerExist(market, pName);
 	}
+
+	free(pName);
 
 	int customerIndex = customerNumber - 1;
 	return market->allCustomers[customerIndex];
@@ -386,7 +412,7 @@ void purchase(SuperMarket* market)
 	
 
 	int keepBuying; // variable that will decide if to keep buy or not.
-	char* barcode; // getting user barcode's choice
+	
 
 	do
 	{
@@ -408,12 +434,9 @@ void purchase(SuperMarket* market)
 			
 			// get from user the product's barcode
 			int productNumber;
-			do
-			{
-				barcode = getName("the product's barcode you want to add, make sure it exists");
-				productNumber = isProductBarcodeExists(market, barcode);
-			} while (!productNumber);
-
+			do {
+				productNumber = productSelect(market);
+			} while (productNumber == -1);
 			
 
 			int productIndex = productNumber - 1;
